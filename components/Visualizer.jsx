@@ -61,12 +61,6 @@ export default class Visualizer extends Component {
 
     updateCameraState() {
         let self = this;
-        setState('cpx', self.camera.position.x);
-        setState('cpy', self.camera.position.y);
-        setState('cpz', self.camera.position.z);
-        setState('crx', self.camera.up.x);
-        setState('cry', self.camera.up.y);
-        setState('crz', self.camera.up.z);
     }
 
     init() {
@@ -90,11 +84,8 @@ export default class Visualizer extends Component {
             1, 100000
         );
         self.setCameraLocRot(
-            [
-                getState('cpx'), getState('cpy'), getState('cpz')
-            ], [
-                getState('crx'), getState('cry'), getState('crz')
-            ]
+            [0, self.cameraDistance, 0],
+            [1, 0, 0]
         );
 
         self.setControls(self.camera, self.renderer.domElement);
