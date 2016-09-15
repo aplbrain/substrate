@@ -66,6 +66,10 @@ export default class Visualizer extends Component {
     init() {
         let self = this;
 
+        // Needed for mouse-camera raytracing (for mouse events):
+        self.mouse = new THREE.Vector2();
+        self.raycaster = new THREE.Raycaster();
+
         // Set up scene primitives:
         self.scene = new THREE.Scene();
         window.scene = self.scene;
@@ -83,6 +87,9 @@ export default class Visualizer extends Component {
             window.innerWidth / window.innerHeight,
             1, 100000
         );
+
+        // Set the default camera location.
+        // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
             [0, self.cameraDistance, 0],
             [1, 0, 0]
@@ -93,6 +100,20 @@ export default class Visualizer extends Component {
         // Add event listeners:
         addEventListener('keydown', ev => {
             self.onKeyDown(self, ev);
+        });
+
+        addEventListener('click', ev => {
+            // Set the position of the mouse vector2 in space
+            self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
+            self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
+
+            // Get the items that fall along the raytraced line between the
+            // camera and the mouse at +inf
+            self.raycaster.setFromCamera(self.mouse, self.camera);
+
+            // Perform the on-click as specified in props.
+            // TODO: Allow layerwise behavior (i.e. ignore certain layers)
+            self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
         });
 
         for (var i = 0; i < self.renderLayers.length; i++) {
