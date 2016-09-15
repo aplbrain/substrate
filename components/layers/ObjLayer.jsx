@@ -37,6 +37,7 @@ export default class ObjLayer extends ThreejsLayer {
     constructor(props) {
         super(props);
         this.getData = props.getData;
+        this._material = props.material;
     }
 
     requestInit(scene) {
@@ -46,10 +47,7 @@ export default class ObjLayer extends ThreejsLayer {
         let mesh = new THREE.OBJLoader().parse(self.getData());
         self._meshGeometry = new THREE.Mesh(
             new THREE.Geometry().fromBufferGeometry(mesh.children[0].geometry),
-            new THREE.MeshBasicMaterial({
-                transparent: true,
-                opacity: 0.1
-            })
+            new THREE.MeshBasicMaterial(self._material)
         );
         self.children = [self._meshGeometry];
 
