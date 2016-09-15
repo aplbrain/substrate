@@ -1,5 +1,7 @@
 # substrate
 
+CircleCI: [![CircleCI](https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg)](https://circleci.com/gh/jhuapl-boss/substrate/tree/master)
+
 ## Installation and Configuration
 
 - Clone the repository.
