@@ -1,0 +1,7 @@
+dependencies:
+    override:
+        - npm install --global eslint eslint-plugin-react
+
+test:
+    override:
+        - eslint --ext js,jsx -c .eslintrc.js ./
