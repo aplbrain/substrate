@@ -1,0 +1,42 @@
+body {
+    margin: 0px;
+}
+
+#info {
+    color: #000;
+    position: absolute;
+    top: 0px; width: 100%;
+    padding: 5px;
+}
+
+a {
+    color: red;
+}
+
+
+.control-panel-container {
+    #control-panel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 300px;
+        background-color: rgba(42, 42, 42, 0.42);
+        transition: all 0.2s;
+
+        .offscreen& {
+            right: -300px;
+        }
+    }
+
+    #control-panel-toggle-fab {
+        position: fixed;
+        right: 310px;
+        top: 10px;
+        transition: all 0.2s;
+
+        .offscreen& {
+            right: 10px;
+        }
+    }
+}
