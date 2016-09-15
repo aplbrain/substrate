@@ -113,7 +113,7 @@ export default class Visualizer extends Component {
 
             // Perform the on-click as specified in props.
             // TODO: Allow layerwise behavior (i.e. ignore certain layers)
-            self.onClick(self, ev, raycaster.intersectObjects(scene.children));
+            self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
         })
 
         for (var i = 0; i < self.renderLayers.length; i++) {
