@@ -105,7 +105,7 @@ export default class Visualizer extends Component {
         addEventListener('click', ev => {
             // Set the position of the mouse vector2 in space
             self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
-			self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
+            self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
 
             // Get the items that fall along the raytraced line between the
             // camera and the mouse at +inf
@@ -114,7 +114,7 @@ export default class Visualizer extends Component {
             // Perform the on-click as specified in props.
             // TODO: Allow layerwise behavior (i.e. ignore certain layers)
             self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
-        })
+        });
 
         for (var i = 0; i < self.renderLayers.length; i++) {
             self.renderLayers[i].requestInit(self.scene);
