@@ -39,6 +39,8 @@ export default class Visualizer extends Component {
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
 
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
+
         this.onReady = this.props.onReady || (() => {});
         this.onReady(self);
 
@@ -91,7 +93,7 @@ export default class Visualizer extends Component {
         // Set the default camera location.
         // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
-            [0, self.cameraDistance, 0],
+            self.startingCameraPosition,
             [1, 0, 0]
         );
 
@@ -121,6 +123,11 @@ export default class Visualizer extends Component {
         }
     }
 
+    getObjectsAtScreenCoordinate(x, y) {
+        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
+        self.raycaster.intersectObjects(scene.children);
+    }
+
     animate() {
         let self = this;
         requestAnimationFrame(self.animate);
@@ -128,7 +135,7 @@ export default class Visualizer extends Component {
         self.controls.update();
 
         for (var i = 0; i < self.renderLayers.length; i++) {
-            self.renderLayers[i].requestRender(self.scene);
+            self.renderLayers[i].requestRender(self.scene, self);
         }
         self.renderer.render(self.scene, self.camera);
     }
