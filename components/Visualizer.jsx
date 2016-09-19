@@ -32,6 +32,10 @@ export default class Visualizer extends Component {
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((cam, dom) => {
             self.controls = new THREE.TrackballControls(cam, dom);
+            self.controls.rotateSpeed = 1.0;
+            self.controls.zoomSpeed = 0.5;
+            self.controls.panSpeed = 0.05;
+
             self.controls.maxDistance = 4000;
             self.controls.addEventListener('end', ev => {
                 self.updateCameraState();
@@ -118,14 +122,21 @@ export default class Visualizer extends Component {
             self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
         });
 
+        window.addEventListener('resize', () => {
+            self.camera.aspect = window.innerWidth / window.innerHeight;
+            self.camera.updateProjectionMatrix();
+            self.renderer.setSize(window.innerWidth, window.innerHeight);
+        }, false);
+
         for (var i = 0; i < self.renderLayers.length; i++) {
             self.renderLayers[i].requestInit(self.scene);
         }
     }
 
     getObjectsAtScreenCoordinate(x, y) {
+        let self = this;
         self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
-        self.raycaster.intersectObjects(scene.children);
+        return self.raycaster.intersectObjects(scene.children);
     }
 
     animate() {
