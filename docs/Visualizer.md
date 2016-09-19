@@ -15,3 +15,6 @@ A number that is the maximum camera distance from the origin when zooming.
 
 ### `renderLayers`: `[Layer]`
 An array of `Layer`s.
+
+### `startingCameraPosition`: `[Number, Number, Number]`
+A point in XYZ space at which the camera should be placed before the first render-cycle.

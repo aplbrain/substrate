@@ -32,12 +32,18 @@ export default class Visualizer extends Component {
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((cam, dom) => {
             self.controls = new THREE.TrackballControls(cam, dom);
+            self.controls.rotateSpeed = 1.0;
+            self.controls.zoomSpeed = 0.5;
+            self.controls.panSpeed = 0.05;
+
             self.controls.maxDistance = 4000;
             self.controls.addEventListener('end', ev => {
                 self.updateCameraState();
             });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
+
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
         this.onReady = this.props.onReady || (() => {});
         this.onReady(self);
@@ -91,7 +97,7 @@ export default class Visualizer extends Component {
         // Set the default camera location.
         // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
-            [0, self.cameraDistance, 0],
+            self.startingCameraPosition,
             [1, 0, 0]
         );
 
@@ -116,9 +122,21 @@ export default class Visualizer extends Component {
             self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
         });
 
+        window.addEventListener('resize', () => {
+            self.camera.aspect = window.innerWidth / window.innerHeight;
+            self.camera.updateProjectionMatrix();
+            self.renderer.setSize(window.innerWidth, window.innerHeight);
+        }, false);
+
         for (var i = 0; i < self.renderLayers.length; i++) {
             self.renderLayers[i].requestInit(self.scene);
         }
+    }
+
+    getObjectsAtScreenCoordinate(x, y) {
+        let self = this;
+        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
+        return self.raycaster.intersectObjects(scene.children);
     }
 
     animate() {
@@ -128,7 +146,7 @@ export default class Visualizer extends Component {
         self.controls.update();
 
         for (var i = 0; i < self.renderLayers.length; i++) {
-            self.renderLayers[i].requestRender(self.scene);
+            self.renderLayers[i].requestRender(self.scene, self);
         }
         self.renderer.render(self.scene, self.camera);
     }
