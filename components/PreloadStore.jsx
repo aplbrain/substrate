@@ -85,24 +85,19 @@ export default class PreloadStore extends Component {
         this.mountEntity = function(filename, keyname, parse="json") {
             fetch(filename).then((res) => {
                 if (res.ok) {
+                    let mountFunction = (content => {
+                        this.store[keyname] = content;
+                        this.mountedEntityCount++;
+                        if (this.mountedEntityCount === this.mountableEntities.length) {
+                            // Trigger the on-ready listeners
+                            this.onReady();
+                        }
+                    });
+
                     if (parse != "json") {
-                        res.text().then(text => {
-                            this.store[keyname] = text;
-                            this.mountedEntityCount++;
-                            if (this.mountedEntityCount === this.mountableEntities.length) {
-                                // Trigger the on-ready listeners
-                                this.onReady();
-                            }
-                        });
+                        res.text().then(mountFunction);
                     } else {
-                        res.json().then(json => {
-                            this.store[keyname] = json;
-                            this.mountedEntityCount++;
-                            if (this.mountedEntityCount === this.mountableEntities.length) {
-                                // Trigger the on-ready listeners
-                                this.onReady();
-                            }
-                        });
+                        res.json().then(mountFunction);
                     }
                 } else {
                     console.error(res);
