@@ -2,6 +2,8 @@
 
 CircleCI: [![CircleCI](https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg)](https://circleci.com/gh/jhuapl-boss/substrate/tree/master)
 
+CodeClimate: [![Code Climate](https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg)](https://codeclimate.com/github/jhuapl-boss/substrate)
+
 ## Installation and Configuration
 
 - Clone the repository.
