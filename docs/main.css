@@ -105,7 +105,7 @@ hr {
     border-left: 0;
     border-right: 0;
 }
-p#heart{
+#heart{
     font-size: 2em;
     line-height: 1;
     text-align: center;
@@ -118,7 +118,7 @@ p#heart{
 /* Home Page
 --------------------------- */
 
-body#index li {
+#index li {
     margin-bottom: 1em;
 }
 
