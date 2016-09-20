@@ -6,12 +6,11 @@ module.exports = {
     "extends": "eslint:recommended",
     "rules": {
         "no-undef": 0,
-        "indent": 2,
-        "linebreak-style": [ "error", "unix" ],
-        "semi": [ "error", "always" ],
+        "indent": 2
+        "semi": 2,
         "no-console": 0,
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error",
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
 
         "no-unused-vars": 0
     },
