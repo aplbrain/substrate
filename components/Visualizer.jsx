@@ -53,8 +53,9 @@ export default class Visualizer extends Component {
     }
 
     requestUpdate() {
-        for (var i = 0; i < this.renderLayers.length; i++) {
-            this.renderLayers[i].needsUpdate = true;
+        let self = this;
+        for (let i in self.renderLayers) {
+            self.renderLayers[i].needsUpdate = true;
         }
     }
 
@@ -128,7 +129,7 @@ export default class Visualizer extends Component {
             self.renderer.setSize(window.innerWidth, window.innerHeight);
         }, false);
 
-        for (var i = 0; i < self.renderLayers.length; i++) {
+        for (let i in self.renderLayers) {
             self.renderLayers[i].requestInit(self.scene);
         }
     }
@@ -145,7 +146,7 @@ export default class Visualizer extends Component {
 
         self.controls.update();
 
-        for (var i = 0; i < self.renderLayers.length; i++) {
+        for (let i in self.renderLayers) {
             self.renderLayers[i].requestRender(self.scene, self);
         }
         self.renderer.render(self.scene, self.camera);
