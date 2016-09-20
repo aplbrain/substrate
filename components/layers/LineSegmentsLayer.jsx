@@ -65,12 +65,7 @@ export default class LineSegmentsLayer extends ThreejsLayer {
 
         for (var i = 0; i < self.fibers.length; i++) {
             var fiberGeometry = new THREE.Geometry();
-            let starter = new THREE.Mesh(
-                new THREE.SphereGeometry(0.025, 5, 5),
-                new THREE.MeshBasicMaterial()
-            );
-            starter.position.set(...self.rescale(self.fibers[i][0]));
-            scene.add(starter);
+
             for (var j = 0; j < self.fibers[i].length; j++) {
                 if (j % 1 === 0) {
                     fiberGeometry.vertices.push(
@@ -87,7 +82,6 @@ export default class LineSegmentsLayer extends ThreejsLayer {
                 })
             );
             self.children.push(line);
-
             scene.add(line);
         }
     }

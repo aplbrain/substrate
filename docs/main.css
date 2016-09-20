@@ -1,4 +1,5 @@
 /*
+Based on:
 https://raw.githubusercontent.com/jasonm23/markdown-css-themes/gh-pages/foghorn.css
 */
 
@@ -129,18 +130,22 @@ body#index li {
         font-size: 120%;
         line-height: 1.4;
     }
-    } /* @iPad */
+} /* @iPad */
 
-    /* iPhone
-    -------------------------------------------------------- */
-    @media only screen and (max-device-width: 480px) {
-        body {
-            text-align: left;
-        }
-        article, footer {
-            width: auto;
-        }
-        article {
-            padding: 0 10px;
-        }
-        } /* @iPhone */
+/* iPhone
+-------------------------------------------------------- */
+@media only screen and (max-device-width: 480px) {
+    body {
+        text-align: left;
+    }
+    article, footer {
+        width: auto;
+    }
+    article {
+        padding: 0 10px;
+    }
+} /* @iPhone */
+
+code.highlighter-rouge {
+    font-size: inherit;
+}
