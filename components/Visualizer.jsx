@@ -32,12 +32,18 @@ export default class Visualizer extends Component {
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((cam, dom) => {
             self.controls = new THREE.TrackballControls(cam, dom);
+            self.controls.rotateSpeed = 1.0;
+            self.controls.zoomSpeed = 0.5;
+            self.controls.panSpeed = 0.05;
+
             self.controls.maxDistance = 4000;
             self.controls.addEventListener('end', ev => {
                 self.updateCameraState();
             });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
+
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
         this.onReady = this.props.onReady || (() => {});
         this.onReady(self);
@@ -47,8 +53,9 @@ export default class Visualizer extends Component {
     }
 
     requestUpdate() {
-        for (var i = 0; i < this.renderLayers.length; i++) {
-            this.renderLayers[i].needsUpdate = true;
+        let self = this;
+        for (let i in self.renderLayers) {
+            self.renderLayers[i].needsUpdate = true;
         }
     }
 
@@ -65,6 +72,10 @@ export default class Visualizer extends Component {
 
     init() {
         let self = this;
+
+        // Needed for mouse-camera raytracing (for mouse events):
+        self.mouse = new THREE.Vector2();
+        self.raycaster = new THREE.Raycaster();
 
         // Set up scene primitives:
         self.scene = new THREE.Scene();
@@ -83,8 +94,11 @@ export default class Visualizer extends Component {
             window.innerWidth / window.innerHeight,
             1, 100000
         );
+
+        // Set the default camera location.
+        // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
-            [0, self.cameraDistance, 0],
+            self.startingCameraPosition,
             [1, 0, 0]
         );
 
@@ -95,9 +109,35 @@ export default class Visualizer extends Component {
             self.onKeyDown(self, ev);
         });
 
-        for (var i = 0; i < self.renderLayers.length; i++) {
+        addEventListener('click', ev => {
+            // Set the position of the mouse vector2 in space
+            self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
+            self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
+
+            // Get the items that fall along the raytraced line between the
+            // camera and the mouse at +inf
+            self.raycaster.setFromCamera(self.mouse, self.camera);
+
+            // Perform the on-click as specified in props.
+            // TODO: Allow layerwise behavior (i.e. ignore certain layers)
+            self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
+        });
+
+        window.addEventListener('resize', () => {
+            self.camera.aspect = window.innerWidth / window.innerHeight;
+            self.camera.updateProjectionMatrix();
+            self.renderer.setSize(window.innerWidth, window.innerHeight);
+        }, false);
+
+        for (let i in self.renderLayers) {
             self.renderLayers[i].requestInit(self.scene);
         }
+    }
+
+    getObjectsAtScreenCoordinate(x, y) {
+        let self = this;
+        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
+        return self.raycaster.intersectObjects(scene.children);
     }
 
     animate() {
@@ -106,8 +146,8 @@ export default class Visualizer extends Component {
 
         self.controls.update();
 
-        for (var i = 0; i < self.renderLayers.length; i++) {
-            self.renderLayers[i].requestRender(self.scene);
+        for (let i in self.renderLayers) {
+            self.renderLayers[i].requestRender(self.scene, self);
         }
         self.renderer.render(self.scene, self.camera);
     }
