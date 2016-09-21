@@ -4,9 +4,9 @@ layout: default
 
 # Top-Level API
 
-## [Visualizer](api/Visualizer)
-## [PreloadStore](api/PreloadStore)
-## [ThreejsLayer](api/ThreejsLayer)
+- [Visualizer](api/Visualizer)
+- [PreloadStore](api/PreloadStore)
+- [ThreejsLayer](api/ThreejsLayer)
 
 # Built-In Layers
 

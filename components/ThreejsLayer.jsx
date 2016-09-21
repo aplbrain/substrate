@@ -77,8 +77,8 @@ export default class ThreejsLayer extends Layer {
             None
         */
         let self = this;
-        for (var i = 0; i < scene.children.length; i++) {
-            scene.remove(scene.children[i]);
+        for (var i = 0; i < self.children.length; i++) {
+            scene.remove(self.children[i]);
         }
     }
 
