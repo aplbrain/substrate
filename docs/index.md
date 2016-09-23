@@ -2,6 +2,8 @@
 layout: default
 ---
 
+If you're using substrate for the first time, you might want to take a look at the [Getting Started](guide/0) page.
+
 # Top-Level API
 
 - [Visualizer](api/Visualizer)
