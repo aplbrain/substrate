@@ -17,9 +17,10 @@
     "three-trackballcontrols": "0.0.5"
   },
   "devDependencies": {
-    "eslint": "^3.5.0",
+    "babel-cli": "^6.14.0",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.11.1",
+    "eslint": "^3.5.0",
     "eslint-plugin-react": "^6.2.2",
     "http-server": "^0.9.0",
     "jsx-loader": "^0.13.2",
