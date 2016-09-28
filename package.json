@@ -4,21 +4,16 @@
   "description": "Open-source platform on which 3D biofidelic visualizations can be drawn.",
   "main": "index.jsx",
   "dependencies": {
-    "babel-core": "^6.13.2",
-    "babel-preset-es2015": "^6.13.2",
-    "eslint": "^3.5.0",
-    "eslint-plugin-react": "^6.2.2",
     "less": "^2.7.1",
-    "material-ui": "^0.15.4",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-tap-event-plugin": "^1.0.0",
     "three": "^0.79.0",
     "three-trackballcontrols": "0.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "eslint": "^3.5.0",
     "eslint-plugin-react": "^6.2.2",
@@ -32,8 +27,11 @@
     "serve": "./node_modules/.bin/http-server -p 8080",
     "dev": "webpack-dev-server --progress --colors --port 8090",
     "webpack": "webpack --progress --colors",
-    "build": "babel ./src --out-dir ./components"
-  },
+
+    "build": "babel ./src --out-dir ./components",
+
+    "prepublish": "npm run build"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jhuapl-boss/substrate.git"
