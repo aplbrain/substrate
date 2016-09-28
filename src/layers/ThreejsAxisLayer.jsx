@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ThreejsLayer from '../ThreejsLayer.jsx';
+import ThreejsLayer from '../ThreejsLayer';
 
 export default class ThreejsAxisLayer extends ThreejsLayer {
     /*

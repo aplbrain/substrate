@@ -29,8 +29,9 @@
     "webpack": "webpack --progress --colors",
 
     "build": "babel ./src --out-dir ./components",
+    "clean": "rm -r ./components",
 
-    "prepublish": "npm run build"
+    "prepublish": "npm run clean && npm run build"
 },
   "repository": {
     "type": "git",
