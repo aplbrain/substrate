@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import Layer from './Layer.jsx';
+import Layer from './Layer';
 
 export default class ThreejsLayer extends Layer {
     /*
