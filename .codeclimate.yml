@@ -1,3 +1,5 @@
+exclude_paths:
+    - "components/"
 engines:
     duplication:
         enabled: true
