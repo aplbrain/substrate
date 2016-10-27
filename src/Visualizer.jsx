@@ -30,7 +30,7 @@ export default class Visualizer extends Component {
         this.updateCameraState = this.updateCameraState.bind(this);
 
         this.renderLayers = this.props.renderLayers || {};
-        this.setControls = this.props.setControls || ((cam, dom) => {
+        this.setControls = this.props.setControls || ((viz, cam, dom) => {
             self.controls = new THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
@@ -102,7 +102,7 @@ export default class Visualizer extends Component {
             [1, 0, 0]
         );
 
-        self.setControls(self.camera, self.renderer.domElement);
+        self.setControls(self, self.camera, self.renderer.domElement);
 
         // Add event listeners:
         addEventListener('keydown', ev => {
