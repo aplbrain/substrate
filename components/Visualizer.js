@@ -51,7 +51,7 @@ var Visualizer = function (_Component) {
         _this.updateCameraState = _this.updateCameraState.bind(_this);
 
         _this.renderLayers = _this.props.renderLayers || {};
-        _this.setControls = _this.props.setControls || function (cam, dom) {
+        _this.setControls = _this.props.setControls || function (viz, cam, dom) {
             self.controls = new THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
@@ -63,6 +63,7 @@ var Visualizer = function (_Component) {
             });
         };
         _this.cameraDistance = _this.props.cameraDistance || 1000;
+        _this.backgroundColor = _this.props.backgroundColor || new THREE.Color(0x000000);
 
         _this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
@@ -112,6 +113,7 @@ var Visualizer = function (_Component) {
             self.renderer = new THREE.WebGLRenderer();
             self.renderer.setPixelRatio(window.devicePixelRatio);
             self.renderer.setSize(window.innerWidth, window.innerHeight);
+            self.scene.background = self.backgroundColor;
 
             // Insert into document:
             var container = document.getElementById('visualizer-target');
@@ -124,14 +126,14 @@ var Visualizer = function (_Component) {
             // TODO: Allow this to be overridden by a prop
             self.setCameraLocRot(self.startingCameraPosition, [1, 0, 0]);
 
-            self.setControls(self.camera, self.renderer.domElement);
+            self.setControls(self, self.camera, self.renderer.domElement);
 
             // Add event listeners:
             addEventListener('keydown', function (ev) {
                 self.onKeyDown(self, ev);
             });
 
-            addEventListener('click', function (ev) {
+            addEventListener('mousedown', function (ev) {
                 // Set the position of the mouse vector2 in space
                 self.mouse.x = ev.clientX / window.innerWidth * 2 - 1;
                 self.mouse.y = -(ev.clientY / window.innerHeight) * 2 + 1;

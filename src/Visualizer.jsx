@@ -42,6 +42,7 @@ export default class Visualizer extends Component {
             });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
+        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
@@ -83,6 +84,7 @@ export default class Visualizer extends Component {
         self.renderer = new THREE.WebGLRenderer();
         self.renderer.setPixelRatio(window.devicePixelRatio);
         self.renderer.setSize(window.innerWidth, window.innerHeight);
+        self.scene.background = self.backgroundColor;
 
         // Insert into document:
         var container = document.getElementById('visualizer-target');
@@ -109,7 +111,7 @@ export default class Visualizer extends Component {
             self.onKeyDown(self, ev);
         });
 
-        addEventListener('click', ev => {
+        addEventListener('mousedown', ev => {
             // Set the position of the mouse vector2 in space
             self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
             self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
