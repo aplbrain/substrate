@@ -13,8 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
 import React, { Component } from 'react';
+
+import * as THREE from 'three/build/three.min';
+import TrackballControls from 'three-trackballcontrols';
+
+THREE.TrackballControls = TrackballControls;
+
 
 export default class Visualizer extends Component {
 

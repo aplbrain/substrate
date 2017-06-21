@@ -10,6 +10,16 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _three = require('three/build/three.min');
+
+var THREE = _interopRequireWildcard(_three);
+
+var _threeTrackballcontrols = require('three-trackballcontrols');
+
+var _threeTrackballcontrols2 = _interopRequireDefault(_threeTrackballcontrols);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -33,6 +43,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                See the License for the specific language governing permissions and
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+THREE.TrackballControls = _threeTrackballcontrols2.default;
 
 var Visualizer = function (_Component) {
     _inherits(Visualizer, _Component);

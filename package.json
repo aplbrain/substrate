@@ -23,14 +23,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "npm run serve | npm run dev",
-    "serve": "./node_modules/.bin/http-server -p 8080",
-    "dev": "webpack-dev-server --progress --colors --port 8090",
-    "webpack": "webpack --progress --colors",
-
     "build": "babel ./src --out-dir ./components",
     "clean": "rm -rf ./components",
-
     "prepublish": "npm run build"
 },
   "repository": {
