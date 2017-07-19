@@ -110,7 +110,7 @@ export default class Visualizer {
         // $FlowBug: Flow doesn't like this but WE DO
         var container = document.getElementById(this.props.targetElement);
         if (!container) {
-            throw Error(`Could not find ${this.props.targetElement} in DOM.`)
+            throw Error(`Could not find ${this.props.targetElement} in DOM.`);
         }
         container.appendChild(self.renderer.domElement);
 
