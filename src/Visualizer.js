@@ -13,22 +13,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import React, { Component } from 'react';
 
 import * as _THREE from 'three/build/three.min';
-import TrackballControls from 'three-trackballcontrols';
+// import TrackballControls from 'three-trackballcontrols';
 
 window.THREE = window.THREE || _THREE;
 
-window.THREE.TrackballControls = TrackballControls;
+// window.THREE.TrackballControls = TrackballControls;
 
 
-export default class Visualizer extends Component {
+export default class Visualizer {
 
     constructor(props) {
-        super(props);
-
         let self = this;
+
+        this.props = props;
 
         this.setCameraLocRot = this.setCameraLocRot.bind(this);
         this.init = this.init.bind(this);
@@ -94,7 +93,7 @@ export default class Visualizer extends Component {
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
-        var container = document.getElementById('visualizer-target');
+        var container = document.getElementById(this.props.targetElement);
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
@@ -166,11 +165,5 @@ export default class Visualizer extends Component {
 
         self.init();
         self.animate();
-    }
-
-    render() {
-        return (
-            <div id="visualizer-target"></div>
-        );
     }
 }
