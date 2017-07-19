@@ -4,5 +4,6 @@ dependencies:
 
 test:
     override:
-        - eslint --ext js,jsx -c .eslintrc.js ./
+        - npm i
+        - eslint -c .eslintrc.js ./
         - flow check
