@@ -109,6 +109,7 @@ export default class Visualizer {
         // Insert into document:
         // $FlowBug: Flow doesn't like this but WE DO
         var container = document.getElementById(this.props.targetElement);
+        // $FlowBug: Flow doesn't like this but WE DO
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
