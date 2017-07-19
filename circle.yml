@@ -1,6 +1,8 @@
 dependencies:
+    pre:
+        - npm install -g npm
     override:
-        - npm install --global eslint babel-eslint eslint-plugin-flowtype flow-bin
+        - npm install --global webpack eslint babel-eslint eslint-plugin-flowtype flow-bin
 
 test:
     override:
