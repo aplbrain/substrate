@@ -1,15 +1,6 @@
 npm-debug.log
-.venv
 .DS_Store
 *.ignore.*
 bundle.js
 
-png/
-graphs/
-
-__pycache__
-.ipynb_checkpoints/
-
-
 node_modules/
-

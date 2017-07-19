@@ -1,3 +1,11 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 /*
 Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
 
@@ -13,21 +21,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import * as THREE from 'three/build/three.min';
-import ThreejsLayer from '../ThreejsLayer';
 
-// console.log(THREE.AxisHelper);
-// console.log(THREE);
+var Layer = function Layer() {
+    _classCallCheck(this, Layer);
+};
 
-export default class ThreejsAxisLayer extends ThreejsLayer {
-    /*
-    The hello-world of layers.
-    */
-
-    requestInit(scene) {
-        let self = this;
-        self.children.push(
-            scene.add(new THREE.AxisHelper(5))
-        );
-    }
-}
+exports.default = Layer;
