@@ -15,10 +15,12 @@ limitations under the License.
 */
 import React, { Component } from 'react';
 
-import * as THREE from 'three/build/three.min';
+import * as _THREE from 'three/build/three.min';
 import TrackballControls from 'three-trackballcontrols';
 
-THREE.TrackballControls = TrackballControls;
+window.THREE = window.THREE || _THREE;
+
+window.THREE.TrackballControls = TrackballControls;
 
 
 export default class Visualizer extends Component {
@@ -36,7 +38,7 @@ export default class Visualizer extends Component {
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((viz, cam, dom) => {
-            self.controls = new THREE.TrackballControls(cam, dom);
+            self.controls = new window.THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
@@ -47,7 +49,7 @@ export default class Visualizer extends Component {
             });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
-        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
+        this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
@@ -80,13 +82,13 @@ export default class Visualizer extends Component {
         let self = this;
 
         // Needed for mouse-camera raytracing (for mouse events):
-        self.mouse = new THREE.Vector2();
-        self.raycaster = new THREE.Raycaster();
+        self.mouse = new window.THREE.Vector2();
+        self.raycaster = new window.THREE.Raycaster();
 
         // Set up scene primitives:
-        self.scene = new THREE.Scene();
+        self.scene = new window.THREE.Scene();
         window.scene = self.scene;
-        self.renderer = new THREE.WebGLRenderer();
+        self.renderer = new window.THREE.WebGLRenderer();
         self.renderer.setPixelRatio(window.devicePixelRatio);
         self.renderer.setSize(window.innerWidth, window.innerHeight);
         self.scene.background = self.backgroundColor;
@@ -96,7 +98,7 @@ export default class Visualizer extends Component {
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
-        self.camera = new THREE.PerspectiveCamera(
+        self.camera = new window.THREE.PerspectiveCamera(
             10,
             window.innerWidth / window.innerHeight,
             1, 100000
@@ -143,7 +145,7 @@ export default class Visualizer extends Component {
 
     getObjectsAtScreenCoordinate(x, y) {
         let self = this;
-        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
+        self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
         return self.raycaster.intersectObjects(scene.children);
     }
 
