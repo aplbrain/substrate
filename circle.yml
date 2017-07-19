@@ -1,7 +1,8 @@
 dependencies:
     override:
-        - npm install --global eslint eslint-plugin-react
+        - npm install --global eslint eslint-plugin-react flow-bin
 
 test:
     override:
         - eslint --ext js,jsx -c .eslintrc.js ./
+        - flow check
