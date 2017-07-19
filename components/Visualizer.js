@@ -45,12 +45,6 @@ var Visualizer = function () {
 
         this.props = props;
 
-        this.setCameraLocRot = this.setCameraLocRot.bind(this);
-        this.init = this.init.bind(this);
-        this.animate = this.animate.bind(this);
-        this.triggerRender = this.triggerRender.bind(this);
-        this.updateCameraState = this.updateCameraState.bind(this);
-
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || function (viz, cam, dom) {
             self.controls = new window.THREE.TrackballControls(cam, dom);
@@ -129,11 +123,11 @@ var Visualizer = function () {
             self.setControls(self, self.camera, self.renderer.domElement);
 
             // Add event listeners:
-            addEventListener('keydown', function (ev) {
+            window.addEventListener('keydown', function (ev) {
                 self.onKeyDown(self, ev);
             });
 
-            addEventListener('mousedown', function (ev) {
+            window.addEventListener('mousedown', function (ev) {
                 // Set the position of the mouse vector2 in space
                 self.mouse.x = ev.clientX / window.innerWidth * 2 - 1;
                 self.mouse.y = -(ev.clientY / window.innerHeight) * 2 + 1;
@@ -144,7 +138,7 @@ var Visualizer = function () {
 
                 // Perform the on-click as specified in props.
                 // TODO: Allow layerwise behavior (i.e. ignore certain layers)
-                self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
+                self.onClick(self, ev, self.raycaster.intersectObjects(self.scene.children));
             });
 
             window.addEventListener('resize', function () {
@@ -162,7 +156,7 @@ var Visualizer = function () {
         value: function getObjectsAtScreenCoordinate(x, y) {
             var self = this;
             self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
-            return self.raycaster.intersectObjects(scene.children);
+            return self.raycaster.intersectObjects(self.scene.children);
         }
     }, {
         key: 'animate',
