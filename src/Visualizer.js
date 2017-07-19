@@ -107,7 +107,8 @@ export default class Visualizer {
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
-        var container : Object = document.getElementById(this.props.targetElement);
+        // $FlowBug: Flow doesn't like this but WE DO
+        var container = document.getElementById(this.props.targetElement);
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
