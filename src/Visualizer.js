@@ -66,7 +66,7 @@ export default class Visualizer {
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
-        this.onReady = this.props.onReady || (() => {});
+        this.onReady = this.props.onReady || (self => {});
         this.onReady(self);
 
         this.onKeyDown = this.props.onKeyDown || (() => {});
@@ -107,7 +107,7 @@ export default class Visualizer {
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
-        var container = document.getElementById(this.props.targetElement);
+        var container : Object = document.getElementById(this.props.targetElement);
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
