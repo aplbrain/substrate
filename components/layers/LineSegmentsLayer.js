@@ -40,7 +40,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-
 var LineSegmentsLayer = function (_ThreejsLayer) {
     _inherits(LineSegmentsLayer, _ThreejsLayer);
 

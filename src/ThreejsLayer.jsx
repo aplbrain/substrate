@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// @flow
+
+
 import Layer from './Layer';
 
 export default class ThreejsLayer extends Layer {
@@ -21,7 +24,7 @@ export default class ThreejsLayer extends Layer {
     Requires a `scene` argument, into which this Layer should render.
     */
 
-    constructor(props) {
+    constructor(props : Object) {
         super(props);
 
         // the `children` array holds all objects that this layer should be
@@ -36,7 +39,7 @@ export default class ThreejsLayer extends Layer {
         return [];
     }
 
-    getAtCoordinate(xyz) {
+    getAtCoordinate(xyz : Array<number>) {
         /*
         Returns the metadata for the object in this layer at the position
         (x, y, z).
@@ -51,7 +54,7 @@ export default class ThreejsLayer extends Layer {
         return [];
     }
 
-    rescale(xyz) {
+    rescale(xyz : Array<number>) {
         /*
         Convert layer-space into global space. For instance, if your images are
         10x10 but need to be half the size when rendered, this should return
@@ -66,7 +69,7 @@ export default class ThreejsLayer extends Layer {
         return xyz;
     }
 
-    clearChildren(scene) {
+    clearChildren(scene : Object) {
         /*
         Remove all of this layer's children from the scene.
 
@@ -82,7 +85,7 @@ export default class ThreejsLayer extends Layer {
         }
     }
 
-    requestInit(scene) {
+    requestInit(scene : Object) {
         /*
         This is run whenever the Visualizer requests that the layer be _fully_
         re-rendered from scratch. Override this function with your own layer's
@@ -101,7 +104,7 @@ export default class ThreejsLayer extends Layer {
         // Permit adding to scene and attaching hooks.
     }
 
-    requestRender(scene) {
+    requestRender(scene : Object) {
         /*
         This is run whenever the Visualizer requests that the layer be partially
         re-rendered (useful in cases where you simply need to update a material

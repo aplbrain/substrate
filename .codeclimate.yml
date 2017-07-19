@@ -16,10 +16,8 @@ eslint:
         extensions:
             - .es6
             - .js
-            - .jsx
 
 ratings:
     paths:
         - "**.es6"
         - "**.js"
-        - "**.jsx"

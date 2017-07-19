@@ -38,7 +38,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-
 var ThreejsLightingLayer = function (_ThreejsLayer) {
     _inherits(ThreejsLightingLayer, _ThreejsLayer);
 

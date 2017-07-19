@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// @flow
+
 import * as _THREE from 'three/build/three.min';
 // import TrackballControls from 'three-trackballcontrols';
 
@@ -24,16 +26,28 @@ window.THREE = window.THREE || _THREE;
 
 export default class Visualizer {
 
-    constructor(props) {
+    props : Object;
+    renderLayers : Object;
+    setControls : Function;
+    controls : Object;
+    cameraDistance : number;
+    backgroundColor : Object;
+    startingCameraPosition : [number, number, number];
+
+    onReady: Function;
+    onKeyDown : Function;
+    onClick : Function;
+
+    camera : Object;
+    mouse : Object;
+    raycaster : Object;
+    scene : Object;
+    renderer : Object;
+
+    constructor(props : Object) {
         let self = this;
 
         this.props = props;
-
-        this.setCameraLocRot = this.setCameraLocRot.bind(this);
-        this.init = this.init.bind(this);
-        this.animate = this.animate.bind(this);
-        this.triggerRender = this.triggerRender.bind(this);
-        this.updateCameraState = this.updateCameraState.bind(this);
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((viz, cam, dom) => {
@@ -52,7 +66,7 @@ export default class Visualizer {
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
-        this.onReady = this.props.onReady || (() => {});
+        this.onReady = this.props.onReady || (self => {});
         this.onReady(self);
 
         this.onKeyDown = this.props.onKeyDown || (() => {});
@@ -66,7 +80,7 @@ export default class Visualizer {
         }
     }
 
-    setCameraLocRot(loc, rot) {
+    setCameraLocRot(loc : [number, number, number], rot : [number, number, number]) {
         let self = this;
         self.camera.position.set(...loc);
         self.camera.up.set(...rot);
@@ -93,7 +107,11 @@ export default class Visualizer {
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
+        // $FlowBug: Flow doesn't like this but WE DO
         var container = document.getElementById(this.props.targetElement);
+        if (!container) {
+            throw Error(`Could not find ${this.props.targetElement} in DOM.`);
+        }
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
@@ -113,11 +131,11 @@ export default class Visualizer {
         self.setControls(self, self.camera, self.renderer.domElement);
 
         // Add event listeners:
-        addEventListener('keydown', ev => {
+        window.addEventListener('keydown', ev => {
             self.onKeyDown(self, ev);
         });
 
-        addEventListener('mousedown', ev => {
+        window.addEventListener('mousedown', ev => {
             // Set the position of the mouse vector2 in space
             self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
             self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
@@ -128,7 +146,7 @@ export default class Visualizer {
 
             // Perform the on-click as specified in props.
             // TODO: Allow layerwise behavior (i.e. ignore certain layers)
-            self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
+            self.onClick(self, ev, self.raycaster.intersectObjects(self.scene.children));
         });
 
         window.addEventListener('resize', () => {
@@ -142,10 +160,10 @@ export default class Visualizer {
         }
     }
 
-    getObjectsAtScreenCoordinate(x, y) {
+    getObjectsAtScreenCoordinate(x : number, y : number) {
         let self = this;
         self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
-        return self.raycaster.intersectObjects(scene.children);
+        return self.raycaster.intersectObjects(self.scene.children);
     }
 
     animate() {

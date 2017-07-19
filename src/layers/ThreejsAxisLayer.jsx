@@ -13,6 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+// @flow
+
 import * as THREE from 'three/build/three.min';
 import ThreejsLayer from '../ThreejsLayer';
 
@@ -24,7 +27,7 @@ export default class ThreejsAxisLayer extends ThreejsLayer {
     The hello-world of layers.
     */
 
-    requestInit(scene) {
+    requestInit(scene : Object) {
         let self = this;
         self.children.push(
             scene.add(new THREE.AxisHelper(5))

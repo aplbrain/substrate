@@ -38,7 +38,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-
 // console.log(THREE.AxisHelper);
 // console.log(THREE);
 
