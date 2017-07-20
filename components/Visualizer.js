@@ -62,7 +62,7 @@ var Visualizer = function () {
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
-        this.onReady = this.props.onReady || function () {};
+        this.onReady = this.props.onReady || function (self) {};
         this.onReady(self);
 
         this.onKeyDown = this.props.onKeyDown || function () {};
@@ -110,7 +110,11 @@ var Visualizer = function () {
             self.scene.background = self.backgroundColor;
 
             // Insert into document:
+            // $FlowBug: Flow doesn't like this but WE DO
             var container = document.getElementById(this.props.targetElement);
+            if (!container) {
+                throw Error('Could not find ' + this.props.targetElement + ' in DOM.');
+            }
             container.appendChild(self.renderer.domElement);
 
             // Provide camera, controls, and renderer:
