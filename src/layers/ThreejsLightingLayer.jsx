@@ -17,10 +17,10 @@ limitations under the License.
 // @flow
 
 import * as THREE from 'three/build/three.min';
-import ThreejsLayer from '../ThreejsLayer';
+import Layer from '../Layer';
 
 
-export default class ThreejsLightingLayer extends ThreejsLayer {
+export default class ThreejsLightingLayer extends Layer {
 
     requestInit(scene : Object) {
         let self = this;

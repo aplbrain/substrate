@@ -17,12 +17,10 @@ limitations under the License.
 // @flow
 
 import * as THREE from 'three/build/three.min';
-import ThreejsLayer from '../ThreejsLayer';
+import Layer from '../Layer';
 
-// console.log(THREE.AxisHelper);
-// console.log(THREE);
 
-export default class ThreejsAxisLayer extends ThreejsLayer {
+export default class ThreejsAxisLayer extends Layer {
     /*
     The hello-world of layers.
     */
