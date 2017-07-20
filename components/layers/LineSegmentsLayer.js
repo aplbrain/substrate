@@ -10,9 +10,9 @@ var _three = require('three/build/three.min');
 
 var THREE = _interopRequireWildcard(_three);
 
-var _ThreejsLayer2 = require('../ThreejsLayer');
+var _Layer2 = require('../Layer');
 
-var _ThreejsLayer3 = _interopRequireDefault(_ThreejsLayer2);
+var _Layer3 = _interopRequireDefault(_Layer2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,9 +40,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-var LineSegmentsLayer = function (_ThreejsLayer) {
-    _inherits(LineSegmentsLayer, _ThreejsLayer);
+var LineSegmentsLayer = function (_Layer) {
+    _inherits(LineSegmentsLayer, _Layer);
 
+    function LineSegmentsLayer(props) {
+        _classCallCheck(this, LineSegmentsLayer);
+
+        var _this = _possibleConstructorReturn(this, (LineSegmentsLayer.__proto__ || Object.getPrototypeOf(LineSegmentsLayer)).call(this, props));
+
+        _this.getData = props.getData;
+        return _this;
+    }
     /*
     This layer renders an array of LineSegments. To use it, declare your layer
     like so:
@@ -64,15 +72,6 @@ var LineSegmentsLayer = function (_ThreejsLayer) {
      That is, the `getData` prop should return an array of at least one line,
     where points on the line are represented as [x, y, z] point-arrays.
     */
-
-    function LineSegmentsLayer(props) {
-        _classCallCheck(this, LineSegmentsLayer);
-
-        var _this = _possibleConstructorReturn(this, (LineSegmentsLayer.__proto__ || Object.getPrototypeOf(LineSegmentsLayer)).call(this, props));
-
-        _this.getData = props.getData;
-        return _this;
-    }
 
     _createClass(LineSegmentsLayer, [{
         key: 'rescale',
@@ -106,6 +105,6 @@ var LineSegmentsLayer = function (_ThreejsLayer) {
     }]);
 
     return LineSegmentsLayer;
-}(_ThreejsLayer3.default);
+}(_Layer3.default);
 
 exports.default = LineSegmentsLayer;

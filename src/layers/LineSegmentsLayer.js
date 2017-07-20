@@ -17,10 +17,10 @@ limitations under the License.
 // @flow
 
 import * as THREE from 'three/build/three.min';
-import ThreejsLayer from '../ThreejsLayer';
+import Layer from '../Layer';
 
 
-export default class LineSegmentsLayer extends ThreejsLayer {
+export default class LineSegmentsLayer extends Layer {
     /*
     This layer renders an array of LineSegments. To use it, declare your layer
     like so:
@@ -46,6 +46,10 @@ export default class LineSegmentsLayer extends ThreejsLayer {
     That is, the `getData` prop should return an array of at least one line,
     where points on the line are represented as [x, y, z] point-arrays.
     */
+
+    getData : Function;
+    needsUpdate : boolean;
+    fibers : Object;
 
     constructor(props : Object) {
         super(props);

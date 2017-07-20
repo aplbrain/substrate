@@ -14,16 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-export default class Layer {
-    /*
-    Layers are the containers for data render in the Visualizer frame. Each
-    Layer requires several properties:
+// @flow
 
-    Required Properties:
-        requestRender: A function that should be run every time a refresh is
-            requested on this Layer. For optimized or high-compute-intensity
-            Layers (such as those that request remote assets or large files),
-            a Layer inheritor may choose to cache the rendered layer and, on
-            requestRender, choose NOT to perform a render.
+import * as THREE from 'three/build/three.min';
+import Layer from '../Layer';
+
+
+export default class ThreejsAxisLayer extends Layer {
+    /*
+    The hello-world of layers.
     */
+
+    requestInit(scene : Object) {
+        let self = this;
+        self.children.push(
+            scene.add(new THREE.AxisHelper(5))
+        );
+    }
 }

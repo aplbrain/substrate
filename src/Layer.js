@@ -17,16 +17,11 @@ limitations under the License.
 // @flow
 
 
-import Layer from './Layer';
+class Layer {
 
-export default class ThreejsLayer extends Layer {
-    /*
-    Requires a `scene` argument, into which this Layer should render.
-    */
+    children : Array<Object>;
 
     constructor(props : Object) {
-        super(props);
-
         // the `children` array holds all objects that this layer should be
         // responsible for. If you remove this layer from the scene, .children
         // should hold all objects that need to be removed. It's courteous to
@@ -34,12 +29,12 @@ export default class ThreejsLayer extends Layer {
         this.children = [];
     }
 
-    getRaycastIntersects() {
+    getRaycastIntersects() : Array<Object> {
         // Stubbed.
         return [];
     }
 
-    getAtCoordinate(xyz : Array<number>) {
+    getAtCoordinate(xyz : Array<number>) : Array<Object> {
         /*
         Returns the metadata for the object in this layer at the position
         (x, y, z).
@@ -127,3 +122,5 @@ export default class ThreejsLayer extends Layer {
         return false;
     }
 }
+
+export default Layer;

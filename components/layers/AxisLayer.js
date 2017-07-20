@@ -10,9 +10,9 @@ var _three = require('three/build/three.min');
 
 var THREE = _interopRequireWildcard(_three);
 
-var _ThreejsLayer2 = require('../ThreejsLayer');
+var _Layer2 = require('../Layer');
 
-var _ThreejsLayer3 = _interopRequireDefault(_ThreejsLayer2);
+var _Layer3 = _interopRequireDefault(_Layer2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,24 +38,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-var ThreejsLightingLayer = function (_ThreejsLayer) {
-    _inherits(ThreejsLightingLayer, _ThreejsLayer);
+var ThreejsAxisLayer = function (_Layer) {
+    _inherits(ThreejsAxisLayer, _Layer);
 
-    function ThreejsLightingLayer() {
-        _classCallCheck(this, ThreejsLightingLayer);
+    function ThreejsAxisLayer() {
+        _classCallCheck(this, ThreejsAxisLayer);
 
-        return _possibleConstructorReturn(this, (ThreejsLightingLayer.__proto__ || Object.getPrototypeOf(ThreejsLightingLayer)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (ThreejsAxisLayer.__proto__ || Object.getPrototypeOf(ThreejsAxisLayer)).apply(this, arguments));
     }
 
-    _createClass(ThreejsLightingLayer, [{
+    _createClass(ThreejsAxisLayer, [{
         key: 'requestInit',
+
+        /*
+        The hello-world of layers.
+        */
+
         value: function requestInit(scene) {
             var self = this;
-            self.children.push(scene.add(new THREE.AmbientLight(0x2ee)));
+            self.children.push(scene.add(new THREE.AxisHelper(5)));
         }
     }]);
 
-    return ThreejsLightingLayer;
-}(_ThreejsLayer3.default);
+    return ThreejsAxisLayer;
+}(_Layer3.default);
 
-exports.default = ThreejsLightingLayer;
+exports.default = ThreejsAxisLayer;
