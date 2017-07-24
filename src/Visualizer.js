@@ -168,6 +168,9 @@ export default class Visualizer {
 
     animate() {
         let self = this;
+        // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        // self.animate is a reference to this function:
+        // requestAnimationFrame(self.animate) means "call `animate()` on next frame"
         requestAnimationFrame(self.animate);
 
         self.controls.update();
