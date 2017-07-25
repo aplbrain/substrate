@@ -16,7 +16,7 @@
 title: substrate
 # email: jordan.matelsky@jhuapl.edu
 description: >
-  A high-speed, react + three.js substrate for visualizing biofidelic data
+  A high-speed three.js substrate for visualizing biofidelic data
 baseurl: "/substrate"
 url: "https://jhuapl-boss.github.io"
 github_username: jhuapl-boss
