@@ -26,28 +26,23 @@ git clone https://github.com/jhuapl-boss/substrate.git
 npm install
 ```
 
-## Testing
-- Install eslint and its react plugin:
-```
-npm i --global eslint eslint-plugin-react@latest --save-dev
-```
-- Run the tests:
-```
-./run-lint
-```
 
 ## Usage
-- Run the server:
+
+```js
+import Visualizer from 'substrate/components/Visualizer';
+import AxisLayer from 'substrate/components/layers/AxisLayer';
+
+V = new Visualizer({
+    renderTarget: "dom-id",
+    layers: {
+        axis: new AxisLayer()
+    }
+});
+
+V.triggerRender();
 ```
-./run-server
-```
-- Now open your browser and navigate to `http://localhost:8003/`.
 
- Navigate by clicking and dragging. Use <kbd>1</kbd>, <kbd>3</kbd>, and <kbd>7</kbd> to snap to cardinal axis views. Press <kbd>D</kbd> while dragging to pan instead of tilt. Scroll to zoom. (These keyboard controls are defined by the end-develoer )
-
-### Using `substrate`
-
-This system exposes inheritable `Layer`s that can be extended to provide a visualization engine for independent 3D or 2D objects in order to combine them efficiently in the same scene.
 
 More documentation forthcoming... In the meantime, see the inline documentation, or get in touch with @j6k4m8.
 
