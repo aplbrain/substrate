@@ -1,8 +1,14 @@
-# substrate
+<p align="center">
+ <img align="center" alt="substrate" src="https://user-images.githubusercontent.com/693511/28587772-50c8d264-7146-11e7-8bbc-2da5d95d5215.png" width="50%" />
+ <h1 align="center" fontsize="3em">substrate</h1>
+</p>
 
-CircleCI: [![CircleCI](https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg)](https://circleci.com/gh/jhuapl-boss/substrate/tree/master)
+<p align="center">
+<a href="https://badge.fury.io/js/apl-substrate"><img alt="npm version" src="https://badge.fury.io/js/apl-substrate.svg" /></a> •
+<a href="https://circleci.com/gh/jhuapl-boss/substrate/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg" /></a> •
+<a href="https://codeclimate.com/github/jhuapl-boss/substrate"><img alt="Code Climate" src="https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg" /></a>
+</p>
 
-CodeClimate: [![Code Climate](https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg)](https://codeclimate.com/github/jhuapl-boss/substrate)
 
 ## Installation and Configuration
 - Install via npm or yarn:
