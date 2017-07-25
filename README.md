@@ -5,6 +5,11 @@ CircleCI: [![CircleCI](https://circleci.com/gh/jhuapl-boss/substrate/tree/master
 CodeClimate: [![Code Climate](https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg)](https://codeclimate.com/github/jhuapl-boss/substrate)
 
 ## Installation and Configuration
+- Install via npm or yarn:
+```
+npm install apl-substrate
+```
+OR:
 
 - Clone the repository.
 ```
