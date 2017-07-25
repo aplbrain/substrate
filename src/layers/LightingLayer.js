@@ -14,17 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ThreejsLayer from '../ThreejsLayer';
+// @flow
 
-export default class ThreejsAxisLayer extends ThreejsLayer {
-    /*
-    The hello-world of layers.
-    */
+import * as THREE from 'three/build/three.min';
+import Layer from '../Layer';
 
-    requestInit(scene) {
+
+export default class ThreejsLightingLayer extends Layer {
+
+    requestInit(scene : Object) {
         let self = this;
         self.children.push(
-            scene.add(new THREE.AxisHelper(5))
+            scene.add(
+                new THREE.AmbientLight(0x2ee)
+            )
         );
     }
 }

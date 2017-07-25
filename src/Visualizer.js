@@ -14,24 +14,44 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import React, { Component } from 'react';
+// @flow
 
-export default class Visualizer extends Component {
+import * as _THREE from 'three/build/three.min';
+// import TrackballControls from 'three-trackballcontrols';
 
-    constructor(props) {
-        super(props);
+window.THREE = window.THREE || _THREE;
 
+// window.THREE.TrackballControls = TrackballControls;
+
+
+export default class Visualizer {
+
+    props : Object;
+    renderLayers : Object;
+    setControls : Function;
+    controls : Object;
+    cameraDistance : number;
+    backgroundColor : Object;
+    startingCameraPosition : [number, number, number];
+
+    onReady: Function;
+    onKeyDown : Function;
+    onClick : Function;
+
+    camera : Object;
+    mouse : Object;
+    raycaster : Object;
+    scene : Object;
+    renderer : Object;
+
+    constructor(props : Object) {
         let self = this;
 
-        this.setCameraLocRot = this.setCameraLocRot.bind(this);
-        this.init = this.init.bind(this);
-        this.animate = this.animate.bind(this);
-        this.triggerRender = this.triggerRender.bind(this);
-        this.updateCameraState = this.updateCameraState.bind(this);
+        this.props = props;
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((viz, cam, dom) => {
-            self.controls = new THREE.TrackballControls(cam, dom);
+            self.controls = new window.THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
@@ -42,11 +62,11 @@ export default class Visualizer extends Component {
             });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
-        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
+        this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
 
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
 
-        this.onReady = this.props.onReady || (() => {});
+        this.onReady = this.props.onReady || (self => {});
         this.onReady(self);
 
         this.onKeyDown = this.props.onKeyDown || (() => {});
@@ -60,7 +80,7 @@ export default class Visualizer extends Component {
         }
     }
 
-    setCameraLocRot(loc, rot) {
+    setCameraLocRot(loc : [number, number, number], rot : [number, number, number]) {
         let self = this;
         self.camera.position.set(...loc);
         self.camera.up.set(...rot);
@@ -75,23 +95,27 @@ export default class Visualizer extends Component {
         let self = this;
 
         // Needed for mouse-camera raytracing (for mouse events):
-        self.mouse = new THREE.Vector2();
-        self.raycaster = new THREE.Raycaster();
+        self.mouse = new window.THREE.Vector2();
+        self.raycaster = new window.THREE.Raycaster();
 
         // Set up scene primitives:
-        self.scene = new THREE.Scene();
+        self.scene = new window.THREE.Scene();
         window.scene = self.scene;
-        self.renderer = new THREE.WebGLRenderer();
+        self.renderer = new window.THREE.WebGLRenderer();
         self.renderer.setPixelRatio(window.devicePixelRatio);
         self.renderer.setSize(window.innerWidth, window.innerHeight);
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
-        var container = document.getElementById('visualizer-target');
+        // $FlowBug: Flow doesn't like this but WE DO
+        var container = document.getElementById(this.props.targetElement);
+        if (!container) {
+            throw Error(`Could not find ${this.props.targetElement} in DOM.`);
+        }
         container.appendChild(self.renderer.domElement);
 
         // Provide camera, controls, and renderer:
-        self.camera = new THREE.PerspectiveCamera(
+        self.camera = new window.THREE.PerspectiveCamera(
             10,
             window.innerWidth / window.innerHeight,
             1, 100000
@@ -107,11 +131,11 @@ export default class Visualizer extends Component {
         self.setControls(self, self.camera, self.renderer.domElement);
 
         // Add event listeners:
-        addEventListener('keydown', ev => {
+        window.addEventListener('keydown', ev => {
             self.onKeyDown(self, ev);
         });
 
-        addEventListener('mousedown', ev => {
+        window.addEventListener('mousedown', ev => {
             // Set the position of the mouse vector2 in space
             self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
             self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
@@ -122,7 +146,7 @@ export default class Visualizer extends Component {
 
             // Perform the on-click as specified in props.
             // TODO: Allow layerwise behavior (i.e. ignore certain layers)
-            self.onClick(self, ev, self.raycaster.intersectObjects(scene.children));
+            self.onClick(self, ev, self.raycaster.intersectObjects(self.scene.children));
         });
 
         window.addEventListener('resize', () => {
@@ -136,14 +160,17 @@ export default class Visualizer extends Component {
         }
     }
 
-    getObjectsAtScreenCoordinate(x, y) {
+    getObjectsAtScreenCoordinate(x : number, y : number) {
         let self = this;
-        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
-        return self.raycaster.intersectObjects(scene.children);
+        self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
+        return self.raycaster.intersectObjects(self.scene.children);
     }
 
     animate() {
         let self = this;
+        // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        // self.animate is a reference to this function:
+        // requestAnimationFrame(self.animate) means "call `animate()` on next frame"
         requestAnimationFrame(self.animate);
 
         self.controls.update();
@@ -159,11 +186,5 @@ export default class Visualizer extends Component {
 
         self.init();
         self.animate();
-    }
-
-    render() {
-        return (
-            <div id="visualizer-target"></div>
-        );
     }
 }

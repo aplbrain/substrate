@@ -1,1 +1,1 @@
-eslint --ext js,jsx -c .eslintrc.js ./
+eslint --ext js -c .eslintrc.js ./

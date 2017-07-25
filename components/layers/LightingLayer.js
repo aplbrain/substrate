@@ -6,11 +6,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ThreejsLayer2 = require('../ThreejsLayer');
+var _three = require('three/build/three.min');
 
-var _ThreejsLayer3 = _interopRequireDefault(_ThreejsLayer2);
+var THREE = _interopRequireWildcard(_three);
+
+var _Layer2 = require('../Layer');
+
+var _Layer3 = _interopRequireDefault(_Layer2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32,49 +38,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-var ObjLayer = function (_ThreejsLayer) {
-    _inherits(ObjLayer, _ThreejsLayer);
+var ThreejsLightingLayer = function (_Layer) {
+    _inherits(ThreejsLightingLayer, _Layer);
 
-    /*
-    Renders a .obj-formatted mesh from a string. For example,
-     let mesh = `
-    v 0 0 0
-    v 0 0 1
-    v 0 1 0
-    f 1 2 3
-    `;
-     new ObjLayer({
-        getData: () => {
-            return mesh;
-        }
-    });
-    */
+    function ThreejsLightingLayer() {
+        _classCallCheck(this, ThreejsLightingLayer);
 
-    function ObjLayer(props) {
-        _classCallCheck(this, ObjLayer);
-
-        var _this = _possibleConstructorReturn(this, (ObjLayer.__proto__ || Object.getPrototypeOf(ObjLayer)).call(this, props));
-
-        _this.getData = props.getData;
-        _this._material = props.material;
-        return _this;
+        return _possibleConstructorReturn(this, (ThreejsLightingLayer.__proto__ || Object.getPrototypeOf(ThreejsLightingLayer)).apply(this, arguments));
     }
 
-    _createClass(ObjLayer, [{
+    _createClass(ThreejsLightingLayer, [{
         key: 'requestInit',
         value: function requestInit(scene) {
             var self = this;
-            self.needsUpdate = true;
-
-            var mesh = new THREE.OBJLoader().parse(self.getData());
-            self._meshGeometry = new THREE.Mesh(new THREE.Geometry().fromBufferGeometry(mesh.children[0].geometry), new THREE.MeshBasicMaterial(self._material));
-            self.children = [self._meshGeometry];
-
-            scene.add(self._meshGeometry);
+            self.children.push(scene.add(new THREE.AmbientLight(0x2ee)));
         }
     }]);
 
-    return ObjLayer;
-}(_ThreejsLayer3.default);
+    return ThreejsLightingLayer;
+}(_Layer3.default);
 
-exports.default = ObjLayer;
+exports.default = ThreejsLightingLayer;

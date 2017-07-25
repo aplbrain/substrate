@@ -1,7 +1,11 @@
 dependencies:
+    pre:
+        - npm install -g npm
     override:
-        - npm install --global eslint eslint-plugin-react
+        - npm install --global webpack eslint babel-eslint eslint-plugin-flowtype flow-bin
 
 test:
     override:
-        - eslint --ext js,jsx -c .eslintrc.js ./
+        - npm i
+        - eslint -c .eslintrc.js ./
+        - flow check

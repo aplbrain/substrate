@@ -14,9 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import ThreejsLayer from '../ThreejsLayer';
+// @flow
 
-export default class LineSegmentsLayer extends ThreejsLayer {
+import * as THREE from 'three/build/three.min';
+import Layer from '../Layer';
+
+
+export default class LineSegmentsLayer extends Layer {
     /*
     This layer renders an array of LineSegments. To use it, declare your layer
     like so:
@@ -43,12 +47,16 @@ export default class LineSegmentsLayer extends ThreejsLayer {
     where points on the line are represented as [x, y, z] point-arrays.
     */
 
-    constructor(props) {
+    getData : Function;
+    needsUpdate : boolean;
+    fibers : Object;
+
+    constructor(props : Object) {
         super(props);
         this.getData = props.getData;
     }
 
-    rescale(xyz) {
+    rescale(xyz : Array<number>) {
         return [
             (xyz[0] / 10),
             (xyz[1] / 10),
@@ -56,7 +64,7 @@ export default class LineSegmentsLayer extends ThreejsLayer {
         ];
     }
 
-    requestInit(scene) {
+    requestInit(scene : Object) {
         let self = this;
         self.needsUpdate = true;
 
