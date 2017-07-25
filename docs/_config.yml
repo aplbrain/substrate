@@ -23,4 +23,4 @@ github_username: jhuapl-boss
 
 # Build settings
 markdown: kramdown
-theme: minima
+theme: jekyll-theme-minimal
