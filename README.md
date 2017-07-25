@@ -30,8 +30,8 @@ npm install
 ## Usage
 
 ```js
-import Visualizer from 'substrate/components/Visualizer';
-import AxisLayer from 'substrate/components/layers/AxisLayer';
+import Visualizer from 'apl-substrate/components/Visualizer';
+import AxisLayer from 'apl-substrate/components/layers/AxisLayer';
 
 V = new Visualizer({
     renderTarget: "dom-id",
