@@ -1,8 +1,8 @@
 {
-  "name": "substrate",
+  "name": "apl-substrate",
   "version": "1.0.0",
   "description": "Open-source platform on which 3D biofidelic visualizations can be drawn.",
-  "main": "index.jsx",
+  "main": "index.js",
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "three": "^0.79.0",
@@ -21,8 +21,7 @@
   "scripts": {
     "build": "babel ./src --out-dir ./components",
     "clean": "rm -rf ./components",
-    "rebuild": "npm run clean && npm run build",
-    "kill": "echo 'no'"
+    "rebuild": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
