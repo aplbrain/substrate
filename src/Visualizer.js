@@ -81,8 +81,8 @@ export default class Visualizer {
     }
 
     setCameraLocRot(
-            loc : [number, number, number],
-            rot : [number, number, number]
+        loc : [number, number, number],
+        rot : [number, number, number]
     ) {
         /*
         Sets the camera's location and rotation. This is useful if you have
