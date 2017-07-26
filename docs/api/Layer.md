@@ -4,7 +4,9 @@ layout: page
 
 # ThreejsLayer
 
-A `ThreejsLayer` is the most basic `Layer` that one can implement. If you are implementing your own `Layer`, you should provide the following:
+A `Layer` is a subset of objects and interactability that can be placed in a Visualizer scene.
+
+If you are implementing your own `Layer`, you should provide the following:
 
 ## Functions
 
