@@ -55,11 +55,7 @@ export default class Visualizer {
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
-
             self.controls.maxDistance = 4000;
-            self.controls.addEventListener('end', ev => {
-                self.updateCameraState();
-            });
         });
         this.cameraDistance = this.props.cameraDistance || 1000;
         this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
@@ -74,21 +70,28 @@ export default class Visualizer {
     }
 
     requestUpdate() {
+        /*
+        Explicitly sets `needsUpdate` in each Layer. Layers can optionally
+        check for this flag in their requestRender.
+        */
         let self = this;
         for (let i in self.renderLayers) {
             self.renderLayers[i].needsUpdate = true;
         }
     }
 
-    setCameraLocRot(loc : [number, number, number], rot : [number, number, number]) {
+    setCameraLocRot(
+        loc : [number, number, number],
+        rot : [number, number, number]
+    ) {
+        /*
+        Sets the camera's location and rotation. This is useful if you have
+        "look-at" logic or other camera-moving functions in your code.
+        */
         let self = this;
         self.camera.position.set(...loc);
         self.camera.up.set(...rot);
         self.camera.updateProjectionMatrix();
-    }
-
-    updateCameraState() {
-        let self = this;
     }
 
     init() {
@@ -107,7 +110,6 @@ export default class Visualizer {
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
-        // $FlowBug: Flow doesn't like this but WE DO
         var container = document.getElementById(this.props.targetElement);
         if (!container) {
             throw Error(`Could not find ${this.props.targetElement} in DOM.`);
@@ -161,12 +163,21 @@ export default class Visualizer {
     }
 
     getObjectsAtScreenCoordinate(x : number, y : number) {
+        /*
+        This is eventually moving out of the Visualizer and into individual
+        Layers. Currently returns ALL objects in the scene that intersect the
+        ray from (x, y) on the screen to +infinity.
+        */
         let self = this;
         self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
         return self.raycaster.intersectObjects(self.scene.children);
     }
 
     animate() {
+        /*
+        Called on every frame (or as quickly as possible). You should never
+        need to call this explicitly.
+        */
         let self = this;
         // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
         // self.animate is a reference to this function:
@@ -182,6 +193,10 @@ export default class Visualizer {
     }
 
     triggerRender() {
+        /*
+        Kick off the animate-loop of this Visualizer. Call this once, and then
+        never again.
+        */
         let self = this;
 
         self.init();

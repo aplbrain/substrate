@@ -51,11 +51,7 @@ var Visualizer = function () {
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
-
             self.controls.maxDistance = 4000;
-            self.controls.addEventListener('end', function (ev) {
-                self.updateCameraState();
-            });
         };
         this.cameraDistance = this.props.cameraDistance || 1000;
         this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
@@ -72,6 +68,10 @@ var Visualizer = function () {
     _createClass(Visualizer, [{
         key: 'requestUpdate',
         value: function requestUpdate() {
+            /*
+            Explicitly sets `needsUpdate` in each Layer. Layers can optionally
+            check for this flag in their requestRender.
+            */
             var self = this;
             for (var i in self.renderLayers) {
                 self.renderLayers[i].needsUpdate = true;
@@ -82,15 +82,14 @@ var Visualizer = function () {
         value: function setCameraLocRot(loc, rot) {
             var _self$camera$position, _self$camera$up;
 
+            /*
+            Sets the camera's location and rotation. This is useful if you have
+            "look-at" logic or other camera-moving functions in your code.
+            */
             var self = this;
             (_self$camera$position = self.camera.position).set.apply(_self$camera$position, _toConsumableArray(loc));
             (_self$camera$up = self.camera.up).set.apply(_self$camera$up, _toConsumableArray(rot));
             self.camera.updateProjectionMatrix();
-        }
-    }, {
-        key: 'updateCameraState',
-        value: function updateCameraState() {
-            var self = this;
         }
     }, {
         key: 'init',
@@ -110,7 +109,6 @@ var Visualizer = function () {
             self.scene.background = self.backgroundColor;
 
             // Insert into document:
-            // $FlowBug: Flow doesn't like this but WE DO
             var container = document.getElementById(this.props.targetElement);
             if (!container) {
                 throw Error('Could not find ' + this.props.targetElement + ' in DOM.');
@@ -158,6 +156,11 @@ var Visualizer = function () {
     }, {
         key: 'getObjectsAtScreenCoordinate',
         value: function getObjectsAtScreenCoordinate(x, y) {
+            /*
+            This is eventually moving out of the Visualizer and into individual
+            Layers. Currently returns ALL objects in the scene that intersect the
+            ray from (x, y) on the screen to +infinity.
+            */
             var self = this;
             self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
             return self.raycaster.intersectObjects(self.scene.children);
@@ -165,7 +168,14 @@ var Visualizer = function () {
     }, {
         key: 'animate',
         value: function animate() {
+            /*
+            Called on every frame (or as quickly as possible). You should never
+            need to call this explicitly.
+            */
             var self = this;
+            // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+            // self.animate is a reference to this function:
+            // requestAnimationFrame(self.animate) means "call `animate()` on next frame"
             requestAnimationFrame(self.animate);
 
             self.controls.update();
@@ -178,6 +188,10 @@ var Visualizer = function () {
     }, {
         key: 'triggerRender',
         value: function triggerRender() {
+            /*
+            Kick off the animate-loop of this Visualizer. Call this once, and then
+            never again.
+            */
             var self = this;
 
             self.init();
