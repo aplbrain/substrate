@@ -67,6 +67,14 @@ export default class Visualizer {
 
         this.onKeyDown = this.props.onKeyDown || (() => {});
         this.onClick = this.props.onClick || (() => {});
+        
+        // obligatory binding to class
+        this.animate = this.animate.bind(this);
+        this.getObjectsAtScreenCoordinate = this.getObjectsAtScreenCoordinate.bind(this);
+        this.init = this.init.bind(this);
+        this.requestUpdate = this.requestUpdate.bind(this);
+        this.setCameraLocRot = this.setCameraLocRot.bind(this);
+        this.triggerRender = this.triggerRender.bind(this);
     }
 
     requestUpdate() {
