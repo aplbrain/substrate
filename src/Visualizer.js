@@ -44,6 +44,13 @@ export default class Visualizer {
     scene : Object;
     renderer : Object;
 
+    animate : Function;
+    getObjectsAtScreenCoordinate : Function;
+    init : Function;
+    requestUpdate : Function;
+    setCameraLocRot : Function;
+    triggerRender : Function;
+
     constructor(props : Object) {
         let self = this;
 
