@@ -2,7 +2,7 @@
 layout: page
 ---
 
-# ThreejsLayer
+# Layer
 
 A `Layer` is a subset of objects and interactability that can be placed in a Visualizer scene.
 
