@@ -7,8 +7,7 @@ If you're using substrate for the first time, you might want to take a look at t
 # Top-Level API
 
 - [Visualizer](api/Visualizer)
-- [PreloadStore](api/PreloadStore)
-- [ThreejsLayer](api/ThreejsLayer)
+- [Layer](api/Layer)
 
 # Built-In Layers
 
