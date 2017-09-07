@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: default
 ---
+
 
 # ThreejsAxisLayer
 
