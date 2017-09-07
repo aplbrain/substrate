@@ -1,6 +1,6 @@
 {
   "name": "apl-substrate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Open-source platform on which 3D biofidelic visualizations can be drawn.",
   "main": "index.js",
   "dependencies": {

@@ -64,6 +64,10 @@ var Visualizer = function () {
         this.onKeyDown = this.props.onKeyDown || function () {};
         this.onClick = this.props.onClick || function () {};
 
+        this.vizWidth = props.width || window.innerWidth;
+        console.log(this.vizWidth);
+        this.vizHeight = props.height || window.innerHeight;
+
         // obligatory binding to class
         this.animate = this.animate.bind(this);
         this.getObjectsAtScreenCoordinate = this.getObjectsAtScreenCoordinate.bind(this);
@@ -71,15 +75,36 @@ var Visualizer = function () {
         this.requestUpdate = this.requestUpdate.bind(this);
         this.setCameraLocRot = this.setCameraLocRot.bind(this);
         this.triggerRender = this.triggerRender.bind(this);
+        this.resize = this.resize.bind(this);
     }
 
     _createClass(Visualizer, [{
+        key: 'resize',
+        value: function resize(newWidth, newHeight) {
+            /*
+            Resize the Visualizer to new pixel sizes.
+            */
+            if (!newWidth) {
+                newWidth = this.container.offsetWidth;
+            }
+            if (!newHeight) {
+                newHeight = this.container.offsetHeight;
+            }
+            this.vizWidth = newWidth;
+            this.vizHeight = newHeight;
+            this.requestUpdate();
+        }
+    }, {
         key: 'requestUpdate',
         value: function requestUpdate() {
             /*
             Explicitly sets `needsUpdate` in each Layer. Layers can optionally
             check for this flag in their requestRender.
             */
+            this.camera.aspect = this.vizWidth / this.vizHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(this.vizWidth, this.vizHeight);
+
             var self = this;
             for (var i in self.renderLayers) {
                 self.renderLayers[i].needsUpdate = true;
@@ -113,7 +138,7 @@ var Visualizer = function () {
             window.scene = self.scene;
             self.renderer = new window.THREE.WebGLRenderer();
             self.renderer.setPixelRatio(window.devicePixelRatio);
-            self.renderer.setSize(window.innerWidth, window.innerHeight);
+            self.renderer.setSize(this.vizWidth, this.vizHeight);
             self.scene.background = self.backgroundColor;
 
             // Insert into document:
@@ -122,9 +147,10 @@ var Visualizer = function () {
                 throw Error('Could not find ' + this.props.targetElement + ' in DOM.');
             }
             container.appendChild(self.renderer.domElement);
+            self.container = container;
 
             // Provide camera, controls, and renderer:
-            self.camera = new window.THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 100000);
+            self.camera = new window.THREE.PerspectiveCamera(10, self.vizWidth / self.vizHeight, 1, 100000);
 
             // Set the default camera location.
             // TODO: Allow this to be overridden by a prop
@@ -139,8 +165,8 @@ var Visualizer = function () {
 
             window.addEventListener('mousedown', function (ev) {
                 // Set the position of the mouse vector2 in space
-                self.mouse.x = ev.clientX / window.innerWidth * 2 - 1;
-                self.mouse.y = -(ev.clientY / window.innerHeight) * 2 + 1;
+                self.mouse.x = ev.clientX / self.vizWidth * 2 - 1;
+                self.mouse.y = -(ev.clientY / self.vizHeight) * 2 + 1;
 
                 // Get the items that fall along the raytraced line between the
                 // camera and the mouse at +inf
@@ -152,9 +178,9 @@ var Visualizer = function () {
             });
 
             window.addEventListener('resize', function () {
-                self.camera.aspect = window.innerWidth / window.innerHeight;
+                self.camera.aspect = self.vizWidth / self.vizHeight;
                 self.camera.updateProjectionMatrix();
-                self.renderer.setSize(window.innerWidth, window.innerHeight);
+                self.renderer.setSize(self.vizWidth, self.vizHeight);
             }, false);
 
             for (var i in self.renderLayers) {

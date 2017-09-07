@@ -30,6 +30,7 @@ export default class Visualizer {
     renderLayers : Object;
     setControls : Function;
     controls : Object;
+    container : Object;
     cameraDistance : number;
     backgroundColor : Object;
     startingCameraPosition : [number, number, number];
@@ -50,6 +51,10 @@ export default class Visualizer {
     requestUpdate : Function;
     setCameraLocRot : Function;
     triggerRender : Function;
+    resize : Function;
+
+    vizWidth : number;
+    vizHeight : number;
 
     constructor(props : Object) {
         let self = this;
@@ -74,7 +79,11 @@ export default class Visualizer {
 
         this.onKeyDown = this.props.onKeyDown || (() => {});
         this.onClick = this.props.onClick || (() => {});
-        
+
+        this.vizWidth = props.width || window.innerWidth;
+        console.log(this.vizWidth);
+        this.vizHeight = props.height || window.innerHeight;
+
         // obligatory binding to class
         this.animate = this.animate.bind(this);
         this.getObjectsAtScreenCoordinate = this.getObjectsAtScreenCoordinate.bind(this);
@@ -82,6 +91,22 @@ export default class Visualizer {
         this.requestUpdate = this.requestUpdate.bind(this);
         this.setCameraLocRot = this.setCameraLocRot.bind(this);
         this.triggerRender = this.triggerRender.bind(this);
+        this.resize = this.resize.bind(this);
+    }
+
+    resize(newWidth : number, newHeight : number) {
+        /*
+        Resize the Visualizer to new pixel sizes.
+        */
+        if (!newWidth) {
+            newWidth = this.container.offsetWidth;
+        }
+        if (!newHeight) {
+            newHeight = this.container.offsetHeight;
+        }
+        this.vizWidth = newWidth;
+        this.vizHeight = newHeight;
+        this.requestUpdate();
     }
 
     requestUpdate() {
@@ -89,6 +114,10 @@ export default class Visualizer {
         Explicitly sets `needsUpdate` in each Layer. Layers can optionally
         check for this flag in their requestRender.
         */
+        this.camera.aspect = this.vizWidth / this.vizHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.vizWidth, this.vizHeight);
+
         let self = this;
         for (let i in self.renderLayers) {
             self.renderLayers[i].needsUpdate = true;
@@ -121,7 +150,7 @@ export default class Visualizer {
         window.scene = self.scene;
         self.renderer = new window.THREE.WebGLRenderer();
         self.renderer.setPixelRatio(window.devicePixelRatio);
-        self.renderer.setSize(window.innerWidth, window.innerHeight);
+        self.renderer.setSize(this.vizWidth, this.vizHeight);
         self.scene.background = self.backgroundColor;
 
         // Insert into document:
@@ -130,11 +159,12 @@ export default class Visualizer {
             throw Error(`Could not find ${this.props.targetElement} in DOM.`);
         }
         container.appendChild(self.renderer.domElement);
+        self.container = container;
 
         // Provide camera, controls, and renderer:
         self.camera = new window.THREE.PerspectiveCamera(
             10,
-            window.innerWidth / window.innerHeight,
+            self.vizWidth / self.vizHeight,
             1, 100000
         );
 
@@ -154,8 +184,8 @@ export default class Visualizer {
 
         window.addEventListener('mousedown', ev => {
             // Set the position of the mouse vector2 in space
-            self.mouse.x = (ev.clientX / window.innerWidth) * 2 - 1;
-            self.mouse.y = - (ev.clientY / window.innerHeight) * 2 + 1;
+            self.mouse.x = (ev.clientX / self.vizWidth) * 2 - 1;
+            self.mouse.y = - (ev.clientY / self.vizHeight) * 2 + 1;
 
             // Get the items that fall along the raytraced line between the
             // camera and the mouse at +inf
@@ -167,9 +197,9 @@ export default class Visualizer {
         });
 
         window.addEventListener('resize', () => {
-            self.camera.aspect = window.innerWidth / window.innerHeight;
+            self.camera.aspect = self.vizWidth / self.vizHeight;
             self.camera.updateProjectionMatrix();
-            self.renderer.setSize(window.innerWidth, window.innerHeight);
+            self.renderer.setSize(self.vizWidth, self.vizHeight);
         }, false);
 
         for (let i in self.renderLayers) {
