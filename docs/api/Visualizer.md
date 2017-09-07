@@ -24,3 +24,12 @@ Note that this does not break compatibility with earlier `substrate` versions.
 
 ### `startingCameraPosition`: `[Number, Number, Number]`
 A point in XYZ space at which the camera should be placed before the first render-cycle.
+
+### `resize`: `(Number, Number)`
+Resizes the visualizer to X by Y pixels. All arguments are optional:
+
+`V.resize()` resizes to fill the container.
+
+`V.resize(10, undefined)` resizes automatically in Y, and sizes to 10 pixels in X.
+
+`V.resize(500, 100)` resizes to 500px X, 100px Y.
