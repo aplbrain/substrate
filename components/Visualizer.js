@@ -95,6 +95,18 @@ var Visualizer = function () {
             this.requestUpdate();
         }
     }, {
+        key: 'removeLayer',
+        value: function removeLayer(key) {
+            this.renderLayers[key].clearChildren(self.scene);
+            delete this.renderLayers[key];
+        }
+    }, {
+        key: 'addLayer',
+        value: function addLayer(key, layer) {
+            this.renderLayers[key] = layer;
+            this.renderLayers[key].requestInit(self.scene);
+        }
+    }, {
         key: 'requestUpdate',
         value: function requestUpdate() {
             /*

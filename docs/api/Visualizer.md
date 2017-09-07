@@ -6,6 +6,12 @@ layout: page
 
 ## Exposed Properties: Functions
 
+### `addLayer` (`key : string`, `layer : Layer`)
+Add a Layer to the Visualizer.
+
+### `removeLayer` (`key : string`)
+Remove the layer from the scene with the key specified.
+
 ### `onClick` (`Visualizer`, `event`, `[objects]`)
 You may optionally pass an `onClick` property to the Visualizer. If you pass a function, it will receive a reference to the Visualizer that called it, the mouse-click event, and an array of objects in the scene for which that click may apply, ordered by distance from the camera (with the 0th element being the closest).
 
@@ -22,10 +28,10 @@ A dictionary or array of `Layer`s. If you specify an array, order is not guarant
 
 Note that this does not break compatibility with earlier `substrate` versions.
 
-### `startingCameraPosition`: `[Number, Number, Number]`
+### `startingCameraPosition`: `[x : number, y : number, z : number]`
 A point in XYZ space at which the camera should be placed before the first render-cycle.
 
-### `resize`: `(Number, Number)`
+### `resize`: `(x : number, y: number)`
 Resizes the visualizer to X by Y pixels. All arguments are optional:
 
 `V.resize()` resizes to fill the container.

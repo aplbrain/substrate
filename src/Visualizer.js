@@ -97,6 +97,10 @@ export default class Visualizer {
     resize(newWidth : number, newHeight : number) {
         /*
         Resize the Visualizer to new pixel sizes.
+
+        Arguments:
+            newWidth (number): New x, or undefined
+            newHeight (number): New y, or undefined
         */
         if (!newWidth) {
             newWidth = this.container.offsetWidth;
@@ -107,6 +111,29 @@ export default class Visualizer {
         this.vizWidth = newWidth;
         this.vizHeight = newHeight;
         this.requestUpdate();
+    }
+
+    removeLayer(key : number|string) {
+        /*
+        Remove a layer at a given string.
+
+        Arguments:
+            key (number|string): The key to remove
+        */
+        this.renderLayers[key].clearChildren(self.scene);
+        delete this.renderLayers[key];
+    }
+
+    addLayer(key : number|string, layer : Object) {
+        /*
+        Add a new layer to the Visualizer.
+
+        Arguments:
+            key (number|string): The key to add
+            layer (Layer): The instantiated Layer to add
+        */
+        this.renderLayers[key] = layer;
+        this.renderLayers[key].requestInit(self.scene);
     }
 
     requestUpdate() {
