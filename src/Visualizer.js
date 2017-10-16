@@ -16,13 +16,6 @@ limitations under the License.
 
 // @flow
 
-import * as _THREE from 'three/build/three.min';
-// import TrackballControls from 'three-trackballcontrols';
-
-window.THREE = window.THREE || _THREE;
-
-// window.THREE.TrackballControls = TrackballControls;
-
 
 export default class Visualizer {
 

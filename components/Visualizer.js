@@ -4,38 +4,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Licensed under the Apache License, Version 2.0 (the "License");
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     you may not use this file except in compliance with the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     You may obtain a copy of the License at
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         http://www.apache.org/licenses/LICENSE-2.0
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     See the License for the specific language governing permissions and
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     limitations under the License.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
-
-var _three = require('three/build/three.min');
-
-var _THREE = _interopRequireWildcard(_three);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import TrackballControls from 'three-trackballcontrols';
+/*
+Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
 
-window.THREE = window.THREE || _THREE;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-// window.THREE.TrackballControls = TrackballControls;
+    http://www.apache.org/licenses/LICENSE-2.0
 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 var Visualizer = function () {
     function Visualizer(props) {
@@ -83,6 +72,9 @@ var Visualizer = function () {
         value: function resize(newWidth, newHeight) {
             /*
             Resize the Visualizer to new pixel sizes.
+             Arguments:
+                newWidth (number): New x, or undefined
+                newHeight (number): New y, or undefined
             */
             if (!newWidth) {
                 newWidth = this.container.offsetWidth;
@@ -97,12 +89,23 @@ var Visualizer = function () {
     }, {
         key: 'removeLayer',
         value: function removeLayer(key) {
+            /*
+            Remove a layer at a given string.
+             Arguments:
+                key (number|string): The key to remove
+            */
             this.renderLayers[key].clearChildren(self.scene);
             delete this.renderLayers[key];
         }
     }, {
         key: 'addLayer',
         value: function addLayer(key, layer) {
+            /*
+            Add a new layer to the Visualizer.
+             Arguments:
+                key (number|string): The key to add
+                layer (Layer): The instantiated Layer to add
+            */
             this.renderLayers[key] = layer;
             this.renderLayers[key].requestInit(self.scene);
         }
