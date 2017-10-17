@@ -26,12 +26,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jhuapl-boss/substrate.git"
+    "url": "git+https://github.com/iscoe/substrate.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jhuapl-boss/substrate/issues"
+    "url": "https://github.com/iscoe/substrate/issues"
   },
-  "homepage": "https://github.com/jhuapl-boss/substrate#readme"
+  "homepage": "https://github.com/iscoe/substrate#readme"
 }
