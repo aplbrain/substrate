@@ -24,10 +24,9 @@ export default class Visualizer {
     setControls : Function;
     controls : Object;
     container : Object;
-    cameraDistance : number;
     backgroundColor : Object;
+    origin : [number, number, number];
     startingCameraPosition : [number, number, number];
-
     onReady: Function;
     onKeyDown : Function;
     onClick : Function;
@@ -62,10 +61,10 @@ export default class Visualizer {
             self.controls.panSpeed = 0.05;
             self.controls.maxDistance = 4000;
         });
-        this.cameraDistance = this.props.cameraDistance || 1000;
         this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
 
-        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
+        this.origin = this.props.origin || [0, 0, 0];
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, 100];
 
         this.onReady = this.props.onReady || (self => {});
         this.onReady(self);
@@ -192,7 +191,7 @@ export default class Visualizer {
         // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
             self.startingCameraPosition,
-            [1, 0, 0]
+            [0, 1, 0]
         );
 
         self.setControls(self, self.camera, self.renderer.domElement);
