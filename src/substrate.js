@@ -3,13 +3,13 @@ import Layer from './Layer';
 
 
 export default {
-	Visualizer,
-	Layer
-}
+    Visualizer,
+    Layer
+};
 
 if (!window.THREE) {
-	throw "You must import THREE >= 0."
+    throw "You must import THREE >= 0.";
 }
 
-window.Visualizer = Visualizer
-window.Layer = Layer
+window.Visualizer = Visualizer;
+window.Layer = Layer;
