@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _Visualizer = require('./Visualizer');
@@ -15,13 +15,13 @@ var _Layer2 = _interopRequireDefault(_Layer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	Visualizer: _Visualizer2.default,
-	Layer: _Layer2.default
+    Visualizer: _Visualizer2.default,
+    Layer: _Layer2.default
 };
 
 
 if (!window.THREE) {
-	throw "You must import THREE >= 0.";
+    throw "You must import THREE >= 0.";
 }
 
 window.Visualizer = _Visualizer2.default;
