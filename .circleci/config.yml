@@ -5,15 +5,15 @@ jobs:
       - image: circleci/node:latest-browsers
     steps:
       - checkout
-      - run: sudo npm install --global eslint eslint-plugin-flowtype@latest babel-eslint
-      #- restore_cache:
-      #    keys:
-      #    - v1-dependencies-{{ checksum "package.json" }}
-      #    - v1-dependencies-
+      - run: sudo npm install --global eslint eslint-plugin-flowtype@latest babel-eslint flow-bin
+      - restore_cache:
+         keys:
+         - v1-dependencies-{{ checksum "package.json" }}
+         - v1-dependencies-
       - run: npm i --only=dev
-      #- save_cache:
-      #    paths:
-      #      - node_modules
-      #    key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache:
+         paths:
+           - node_modules
+         key: v1-dependencies-{{ checksum "package.json" }}
       - run: bash ./run-lint
       - run: flow check
