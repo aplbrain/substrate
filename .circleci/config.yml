@@ -5,7 +5,7 @@ jobs:
       - image: circleci/node:latest-browsers
     steps:
       - checkout
-      - run: sudo npm install --global eslint
+      - run: sudo npm install --global eslint eslint-plugin-flowtype@latest
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
