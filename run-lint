@@ -1,1 +1,1 @@
-eslint --ext js -c .eslintrc.js ./
+eslint --ext js -c .eslintrc.js ./ --ignore-pattern *.min.js
