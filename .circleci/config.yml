@@ -3,5 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest-browsers
-  steps:
-    - checkout
+    steps:
+      - checkout
+      - run: npm i
+      - run: eslint -c .eslintrc.js ./
+      - run: flow check
