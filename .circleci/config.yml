@@ -5,6 +5,15 @@ jobs:
       - image: circleci/node:latest-browsers
     steps:
       - checkout
+      - run: node install eslint
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
       - run: npm i
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run: eslint -c .eslintrc.js ./
       - run: flow check
