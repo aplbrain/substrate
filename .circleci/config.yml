@@ -1,10 +1,7 @@
 version: 2
 jobs:
-    build:
-        docker:
-            - image: circleci/node:latest-browsers
-    steps:
-        - checkout
-        - run: npm i
-        - run: eslint -c .eslintrc.js ./
-        - run: flow check
+  build:
+    docker:
+      - image: circleci/node:latest-browsers
+  steps:
+    - checkout
