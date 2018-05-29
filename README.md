@@ -5,7 +5,7 @@
 
 <p align="center">
 <a href="https://badge.fury.io/js/apl-substrate"><img alt="npm version" src="https://badge.fury.io/js/apl-substrate.svg" /></a> •
-<a href="https://circleci.com/gh/jhuapl-boss/substrate/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg" /></a> •
+<a href="https://circleci.com/gh/jhuapl-boss/substrate/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/iscoe/substrate.svg?style=svg" /></a> •
 <a href="https://codeclimate.com/github/jhuapl-boss/substrate"><img alt="Code Climate" src="https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg" /></a>
 </p>
 
