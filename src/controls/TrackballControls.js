@@ -58,24 +58,24 @@ var TrackballControls = function (object, domElement) {
     var lastPosition = new THREE.Vector3();
 
     var _state = STATE.NONE,
-    _prevState = STATE.NONE,
+        _prevState = STATE.NONE,
 
-    _eye = new THREE.Vector3(),
+        _eye = new THREE.Vector3(),
 
-    _movePrev = new THREE.Vector2(),
-    _moveCurr = new THREE.Vector2(),
+        _movePrev = new THREE.Vector2(),
+        _moveCurr = new THREE.Vector2(),
 
-    _lastAxis = new THREE.Vector3(),
-    _lastAngle = 0,
+        _lastAxis = new THREE.Vector3(),
+        _lastAngle = 0,
 
-    _zoomStart = new THREE.Vector2(),
-    _zoomEnd = new THREE.Vector2(),
+        _zoomStart = new THREE.Vector2(),
+        _zoomEnd = new THREE.Vector2(),
 
-    _touchZoomDistanceStart = 0,
-    _touchZoomDistanceEnd = 0,
+        _touchZoomDistanceStart = 0,
+        _touchZoomDistanceEnd = 0,
 
-    _panStart = new THREE.Vector2(),
-    _panEnd = new THREE.Vector2();
+        _panStart = new THREE.Vector2(),
+        _panEnd = new THREE.Vector2();
 
     // for reset
 
@@ -168,12 +168,12 @@ var TrackballControls = function (object, domElement) {
     this.rotateCamera = (function () {
 
         var axis = new THREE.Vector3(),
-        quaternion = new THREE.Quaternion(),
-        eyeDirection = new THREE.Vector3(),
-        objectUpDirection = new THREE.Vector3(),
-        objectSidewaysDirection = new THREE.Vector3(),
-        moveDirection = new THREE.Vector3(),
-        angle;
+            quaternion = new THREE.Quaternion(),
+            eyeDirection = new THREE.Vector3(),
+            objectUpDirection = new THREE.Vector3(),
+            objectSidewaysDirection = new THREE.Vector3(),
+            moveDirection = new THREE.Vector3(),
+            angle;
 
         return function rotateCamera() {
 
@@ -258,8 +258,8 @@ var TrackballControls = function (object, domElement) {
     this.panCamera = (function () {
 
         var mouseChange = new THREE.Vector2(),
-        objectUp = new THREE.Vector3(),
-        pan = new THREE.Vector3();
+            objectUp = new THREE.Vector3(),
+            pan = new THREE.Vector3();
 
         return function panCamera() {
 
@@ -495,17 +495,17 @@ var TrackballControls = function (object, domElement) {
 
         switch (event.deltaMode) {
 
-            case 2:
+        case 2:
             // Zoom in pages
             _zoomStart.y -= event.deltaY * 0.025;
             break;
 
-            case 1:
+        case 1:
             // Zoom in lines
             _zoomStart.y -= event.deltaY * 0.01;
             break;
 
-            default:
+        default:
             // undefined, 0, assume pixels
             _zoomStart.y -= event.deltaY * 0.00025;
             break;
@@ -523,13 +523,13 @@ var TrackballControls = function (object, domElement) {
 
         switch (event.touches.length) {
 
-            case 1:
+        case 1:
             _state = STATE.TOUCH_ROTATE;
             _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
             _movePrev.copy(_moveCurr);
             break;
 
-            default: // 2 or more
+        default: // 2 or more
             _state = STATE.TOUCH_ZOOM_PAN;
             var dx = event.touches[0].pageX - event.touches[1].pageX;
             var dy = event.touches[0].pageY - event.touches[1].pageY;
@@ -556,12 +556,12 @@ var TrackballControls = function (object, domElement) {
 
         switch (event.touches.length) {
 
-            case 1:
+        case 1:
             _movePrev.copy(_moveCurr);
             _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
             break;
 
-            default: // 2 or more
+        default: // 2 or more
             var dx = event.touches[0].pageX - event.touches[1].pageX;
             var dy = event.touches[0].pageY - event.touches[1].pageY;
             _touchZoomDistanceEnd = Math.sqrt(dx * dx + dy * dy);
@@ -581,11 +581,11 @@ var TrackballControls = function (object, domElement) {
 
         switch (event.touches.length) {
 
-            case 0:
+        case 0:
             _state = STATE.NONE;
             break;
 
-            case 1:
+        case 1:
             _state = STATE.TOUCH_ROTATE;
             _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
             _movePrev.copy(_moveCurr);
