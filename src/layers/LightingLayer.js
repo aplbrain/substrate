@@ -16,18 +16,28 @@ limitations under the License.
 
 // @flow
 
-import * as THREE from 'three/build/three.min';
+import * as THREE from 'three';
 import Layer from '../Layer';
 
 
-export default class ThreejsLightingLayer extends Layer {
+export default class LightingLayer extends Layer {
+    /*
+    Classic three-point lighting scheme, as a substrate layer.
+    */
 
     requestInit(scene : Object) {
         let self = this;
-        self.children.push(
-            scene.add(
-                new THREE.AmbientLight(0x2ee)
-            )
-        );
+        // Key
+        let key = new THREE.AmbientLight(0xfff);
+        key.position.set(-5, -5, 5);
+        self.children.push(scene.add(key));
+        // Fill
+        let fill = new THREE.AmbientLight(0xccc);
+        fill.position.set(5, -5, 4);
+        self.children.push(scene.add(fill));
+        // Back
+        let back = new THREE.AmbientLight(0xccc);
+        back.position.set(-5, 5, 3);
+        self.children.push(scene.add(back));
     }
 }
