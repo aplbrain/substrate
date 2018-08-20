@@ -2,6 +2,7 @@
 
 - 1.1.0
     - **Add TrackballControls to live endogenously inside substrate**. Remove reliance upon window.THREE.
+	- **Update layer documentation** and copyright notices.
 - 1.0.4
     - **Visualizer#addLayer` and `Visualizer#removeLayer`**: Add and remove layers after the Visualizer has been created and rendered.
 - 1.0.3 (September 7, 2017)
