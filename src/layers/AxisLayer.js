@@ -20,15 +20,15 @@ import * as THREE from 'three/build/three.min';
 import Layer from '../Layer';
 
 
-export default class ThreejsAxisLayer extends Layer {
+export default class AxisLayer extends Layer {
     /*
-    The hello-world of layers.
+    The hello-world of layers. Renders a 5-radius RGB-XYZ axis.
     */
 
     requestInit(scene : Object) {
         let self = this;
         self.children.push(
-            scene.add(new THREE.AxisHelper(5))
+            scene.add(new THREE.AxesHelper(5))
         );
     }
 }
