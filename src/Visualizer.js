@@ -79,7 +79,6 @@ export default class Visualizer {
         this.onClick = this.props.onClick || (() => {});
 
         this.vizWidth = props.width || window.innerWidth;
-        console.log(this.vizWidth);
         this.vizHeight = props.height || window.innerHeight;
 
         // obligatory binding to class
