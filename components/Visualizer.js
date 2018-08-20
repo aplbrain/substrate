@@ -4,27 +4,41 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Licensed under the Apache License, Version 2.0 (the "License");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     you may not use this file except in compliance with the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     You may obtain a copy of the License at
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         http://www.apache.org/licenses/LICENSE-2.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Unless required by applicable law or agreed to in writing, software
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     distributed under the License is distributed on an "AS IS" BASIS,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     See the License for the specific language governing permissions and
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     limitations under the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */
+
+var _three = require('three');
+
+var THREE = _interopRequireWildcard(_three);
+
+var _TrackballControls = require('./controls/TrackballControls.js');
+
+var _TrackballControls2 = _interopRequireDefault(_TrackballControls);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/*
-Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+THREE.TrackballControls = _TrackballControls2.default;
+THREE.TrackballControls.prototype = Object.create(THREE.EventDispatcher.prototype);
+THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 
 var Visualizer = function () {
     function Visualizer(props) {
@@ -36,13 +50,13 @@ var Visualizer = function () {
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || function (viz, cam, dom) {
-            self.controls = new window.THREE.TrackballControls(cam, dom);
+            self.controls = new THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
             self.controls.maxDistance = 4000;
         };
-        this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
+        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
 
         this.origin = this.props.origin || [0, 0, 0];
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, 100];
@@ -145,13 +159,13 @@ var Visualizer = function () {
             var self = this;
 
             // Needed for mouse-camera raytracing (for mouse events):
-            self.mouse = new window.THREE.Vector2();
-            self.raycaster = new window.THREE.Raycaster();
+            self.mouse = new THREE.Vector2();
+            self.raycaster = new THREE.Raycaster();
 
             // Set up scene primitives:
-            self.scene = new window.THREE.Scene();
+            self.scene = new THREE.Scene();
             window.scene = self.scene;
-            self.renderer = new window.THREE.WebGLRenderer();
+            self.renderer = new THREE.WebGLRenderer();
             self.renderer.setPixelRatio(window.devicePixelRatio);
             self.renderer.setSize(this.vizWidth, this.vizHeight);
             self.scene.background = self.backgroundColor;
@@ -165,7 +179,7 @@ var Visualizer = function () {
             self.container = container;
 
             // Provide camera, controls, and renderer:
-            self.camera = new window.THREE.PerspectiveCamera(10, self.vizWidth / self.vizHeight, 1, 100000);
+            self.camera = new THREE.PerspectiveCamera(10, self.vizWidth / self.vizHeight, 1, 100000);
 
             // Set the default camera location.
             // TODO: Allow this to be overridden by a prop
@@ -211,7 +225,7 @@ var Visualizer = function () {
             ray from (x, y) on the screen to +infinity.
             */
             var self = this;
-            self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
+            self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
             return self.raycaster.intersectObjects(self.scene.children);
         }
     }, {
