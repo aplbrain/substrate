@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _three = require('three/build/three.min');
+var _three = require('three');
 
 var THREE = _interopRequireWildcard(_three);
 
@@ -23,7 +23,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Licensed under the Apache License, Version 2.0 (the "License");
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                you may not use this file except in compliance with the License.
@@ -38,24 +38,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-var ThreejsLightingLayer = function (_Layer) {
-    _inherits(ThreejsLightingLayer, _Layer);
+var LightingLayer = function (_Layer) {
+    _inherits(LightingLayer, _Layer);
 
-    function ThreejsLightingLayer() {
-        _classCallCheck(this, ThreejsLightingLayer);
+    function LightingLayer() {
+        _classCallCheck(this, LightingLayer);
 
-        return _possibleConstructorReturn(this, (ThreejsLightingLayer.__proto__ || Object.getPrototypeOf(ThreejsLightingLayer)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (LightingLayer.__proto__ || Object.getPrototypeOf(LightingLayer)).apply(this, arguments));
     }
 
-    _createClass(ThreejsLightingLayer, [{
+    _createClass(LightingLayer, [{
         key: 'requestInit',
+
+        /*
+        Classic three-point lighting scheme, as a substrate layer.
+        */
+
         value: function requestInit(scene) {
             var self = this;
-            self.children.push(scene.add(new THREE.AmbientLight(0x2ee)));
+            // Key
+            var key = new THREE.PointLight(0xfff, 1, 100);
+            key.position.set(-5, -5, 5);
+            self.children.push(scene.add(key));
+            // Fill
+            var fill = new THREE.PointLight(0xccc, 0.7, 100);
+            fill.position.set(5, -5, 4);
+            self.children.push(scene.add(fill));
+            // Back
+            var back = new THREE.PointLight(0xccc, 0.65, 100);
+            back.position.set(-5, 5, 3);
+            self.children.push(scene.add(back));
         }
     }]);
 
-    return ThreejsLightingLayer;
+    return LightingLayer;
 }(_Layer3.default);
 
-exports.default = ThreejsLightingLayer;
+exports.default = LightingLayer;
