@@ -28,15 +28,15 @@ export default class LightingLayer extends Layer {
     requestInit(scene : Object) {
         let self = this;
         // Key
-        let key = new THREE.AmbientLight(0xfff);
+        let key = new THREE.PointLight(0xfff, 1, 100);
         key.position.set(-5, -5, 5);
         self.children.push(scene.add(key));
         // Fill
-        let fill = new THREE.AmbientLight(0xccc);
+        let fill = new THREE.PointLight(0xccc, 0.7, 100);
         fill.position.set(5, -5, 4);
         self.children.push(scene.add(fill));
         // Back
-        let back = new THREE.AmbientLight(0xccc);
+        let back = new THREE.PointLight(0xccc, 0.65, 100);
         back.position.set(-5, 5, 3);
         self.children.push(scene.add(back));
     }
