@@ -318,7 +318,7 @@ var OBJLoader = function () {
                     this.addVertexLine(this.parseVertexIndex(vertices[vi], vLen));
                 }
 
-                for (var uvi = 0, l = uvs.length; uvi < l; uvi++) {
+                for (var uvi = 0, ul = uvs.length; uvi < ul; uvi++) {
 
                     this.addUVLine(this.parseUVIndex(uvs[uvi], uvLen));
                 }
@@ -418,19 +418,19 @@ var OBJLoader = function () {
 
                     switch (data[0]) {
 
-                        case 'v':
-                            state.vertices.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
-                            if (data.length === 8) {
+                    case 'v':
+                        state.vertices.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+                        if (data.length === 8) {
 
-                                state.colors.push(parseFloat(data[4]), parseFloat(data[5]), parseFloat(data[6]));
-                            }
-                            break;
-                        case 'vn':
-                            state.normals.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
-                            break;
-                        case 'vt':
-                            state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
-                            break;
+                            state.colors.push(parseFloat(data[4]), parseFloat(data[5]), parseFloat(data[6]));
+                        }
+                        break;
+                    case 'vn':
+                        state.normals.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+                        break;
+                    case 'vt':
+                        state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
+                        break;
 
                     }
                 } else if (lineFirstChar === 'f') {
@@ -456,10 +456,10 @@ var OBJLoader = function () {
 
                     var v1 = faceVertices[0];
 
-                    for (var j = 1, jl = faceVertices.length - 1; j < jl; j++) {
+                    for (var k = 1, kl = faceVertices.length - 1; k < kl; k++) {
 
-                        var v2 = faceVertices[j];
-                        var v3 = faceVertices[j + 1];
+                        var v2 = faceVertices[k];
+                        var v3 = faceVertices[k + 1];
 
                         state.addFace(v1[0], v2[0], v3[0], v1[1], v2[1], v3[1], v1[2], v2[2], v3[2]);
                     }
@@ -485,7 +485,7 @@ var OBJLoader = function () {
                     state.addLineGeometry(lineVertices, lineUVs);
                 } else if (lineFirstChar === 'p') {
 
-                    var lineData = line.substr(1).trim();
+                    lineData = line.substr(1).trim();
                     var pointData = lineData.split(" ");
 
                     state.addPointGeometry(pointData);
@@ -559,9 +559,9 @@ var OBJLoader = function () {
             var container = new THREE.Group();
             container.materialLibraries = [].concat(state.materialLibraries);
 
-            for (var i = 0, l = state.objects.length; i < l; i++) {
+            for (var ji = 0, ll = state.objects.length; ji < ll; ji++) {
 
-                var object = state.objects[i];
+                var object = state.objects[ji];
                 var geometry = object.geometry;
                 var materials = object.materials;
                 var isLine = geometry.type === 'Line';
@@ -601,7 +601,7 @@ var OBJLoader = function () {
                 for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
 
                     var sourceMaterial = materials[mi];
-                    var material = undefined;
+                    material = undefined;
 
                     if (this.materials !== null) {
 
@@ -656,10 +656,10 @@ var OBJLoader = function () {
 
                 if (createdMaterials.length > 1) {
 
-                    for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
+                    for (var mi2 = 0, miLen2 = materials.length; mi2 < miLen2; mi2++) {
 
-                        var sourceMaterial = materials[mi];
-                        buffergeometry.addGroup(sourceMaterial.groupStart, sourceMaterial.groupCount, mi);
+                        sourceMaterial = materials[mi2];
+                        buffergeometry.addGroup(sourceMaterial.groupStart, sourceMaterial.groupCount, mi2);
                     }
 
                     if (isLine) {

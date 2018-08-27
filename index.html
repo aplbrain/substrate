@@ -2,29 +2,20 @@
 <html>
 <head>
 	<title></title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
-	<script type="text/javascript" src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
 	<script type="text/javascript" src="./substrate.min.js"></script>
 </head>
 <body>
 	<div id="target"></div>
 	<script>
-
-		class AxisLayer extends Layer {
-			requestRender(scene) {
-				scene.add(new window.THREE.AxisHelper(5))
-			}
-		}
-
-		V = new Visualizer({
+		V = new substrate.Visualizer({
 			targetElement: "target",
 			renderLayers: {
-				axes: new AxisLayer()
+				axes: new substrate.layers.AxisLayer()
 			}
 		});
 
 		V.triggerRender();
-		
+
 	</script>
 </body>
 </html>

@@ -348,7 +348,7 @@ var OBJLoader = (function () {
 
                 }
 
-                for (var uvi = 0, l = uvs.length; uvi < l; uvi++) {
+                for (var uvi = 0, ul = uvs.length; uvi < ul; uvi++) {
 
                     this.addUVLine(this.parseUVIndex(uvs[uvi], uvLen));
 
@@ -430,7 +430,7 @@ var OBJLoader = (function () {
 
             var lines = text.split('\n');
             var line = '',
-            lineFirstChar = '';
+                lineFirstChar = '';
             var lineLength = 0;
             var result = [];
 
@@ -458,7 +458,7 @@ var OBJLoader = (function () {
 
                     switch (data[0]) {
 
-                        case 'v':
+                    case 'v':
                         state.vertices.push(
                             parseFloat(data[1]),
                             parseFloat(data[2]),
@@ -475,14 +475,14 @@ var OBJLoader = (function () {
 
                         }
                         break;
-                        case 'vn':
+                    case 'vn':
                         state.normals.push(
                             parseFloat(data[1]),
                             parseFloat(data[2]),
                             parseFloat(data[3])
                         );
                         break;
-                        case 'vt':
+                    case 'vt':
                         state.uvs.push(
                             parseFloat(data[1]),
                             parseFloat(data[2])
@@ -516,10 +516,10 @@ var OBJLoader = (function () {
 
                     var v1 = faceVertices[0];
 
-                    for (var j = 1, jl = faceVertices.length - 1; j < jl; j++) {
+                    for (var k = 1, kl = faceVertices.length - 1; k < kl; k++) {
 
-                        var v2 = faceVertices[j];
-                        var v3 = faceVertices[j + 1];
+                        var v2 = faceVertices[k];
+                        var v3 = faceVertices[k + 1];
 
                         state.addFace(
                             v1[0], v2[0], v3[0],
@@ -533,7 +533,7 @@ var OBJLoader = (function () {
 
                     var lineParts = line.substring(1).trim().split(" ");
                     var lineVertices = [],
-                    lineUVs = [];
+                        lineUVs = [];
 
                     if (line.indexOf("/") === -1) {
 
@@ -555,7 +555,7 @@ var OBJLoader = (function () {
 
                 } else if (lineFirstChar === 'p') {
 
-                    var lineData = line.substr(1).trim();
+                    lineData = line.substr(1).trim();
                     var pointData = lineData.split(" ");
 
                     state.addPointGeometry(pointData);
@@ -638,9 +638,9 @@ var OBJLoader = (function () {
             var container = new THREE.Group();
             container.materialLibraries = [].concat(state.materialLibraries);
 
-            for (var i = 0, l = state.objects.length; i < l; i++) {
+            for (var ji = 0, ll = state.objects.length; ji < ll; ji++) {
 
-                var object = state.objects[i];
+                var object = state.objects[ji];
                 var geometry = object.geometry;
                 var materials = object.materials;
                 var isLine = (geometry.type === 'Line');
@@ -684,7 +684,7 @@ var OBJLoader = (function () {
                 for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
 
                     var sourceMaterial = materials[mi];
-                    var material = undefined;
+                    material = undefined;
 
                     if (this.materials !== null) {
 
@@ -747,10 +747,10 @@ var OBJLoader = (function () {
 
                 if (createdMaterials.length > 1) {
 
-                    for (var mi = 0, miLen = materials.length; mi < miLen; mi++) {
+                    for (var mi2 = 0, miLen2 = materials.length; mi2 < miLen2; mi2++) {
 
-                        var sourceMaterial = materials[mi];
-                        buffergeometry.addGroup(sourceMaterial.groupStart, sourceMaterial.groupCount, mi);
+                        sourceMaterial = materials[mi2];
+                        buffergeometry.addGroup(sourceMaterial.groupStart, sourceMaterial.groupCount, mi2);
 
                     }
 
