@@ -1,5 +1,5 @@
 <p align="center">
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
  <img align="center" alt="substrate" src="https://user-images.githubusercontent.com/693511/28587772-50c8d264-7146-11e7-8bbc-2da5d95d5215.png" width="50%" />
  <h1 align="center" fontsize="3em">substrate</h1>
 </p>
@@ -60,8 +60,8 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/7283561?v=4" width="100px;"/><br /><sub><b>Joe Downs</b></sub>](https://github.com/jtpdowns)<br />[💻](https://github.com/iscoe/substrate/commits?author=jtpdowns "Code") | [<img src="https://avatars3.githubusercontent.com/u/14301614?v=4" width="100px;"/><br /><sub><b>hpcowley</b></sub>](https://github.com/hpcowley)<br />[💻](https://github.com/iscoe/substrate/commits?author=hpcowley "Code") |
-| :---: | :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/7283561?v=4" width="100px;"/><br /><sub><b>Joe Downs</b></sub>](https://github.com/jtpdowns)<br />[💻](https://github.com/iscoe/substrate/commits?author=jtpdowns "Code") | [<img src="https://avatars3.githubusercontent.com/u/14301614?v=4" width="100px;"/><br /><sub><b>hpcowley</b></sub>](https://github.com/hpcowley)<br />[💻](https://github.com/iscoe/substrate/commits?author=hpcowley "Code") | [<img src="https://avatars2.githubusercontent.com/u/693511?v=4" width="100px;"/><br /><sub><b>Jordan Matelsky</b></sub>](http://jordan.matelsky.com)<br />[💻](https://github.com/iscoe/substrate/commits?author=j6k4m8 "Code") |
+| :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
