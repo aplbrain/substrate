@@ -20,6 +20,7 @@ limitations under the License.
 class Layer {
 
     children : Array<Object>;
+    visible : boolean;
 
     constructor(props : Object) {
         // the `children` array holds all objects that this layer should be
@@ -27,6 +28,7 @@ class Layer {
         // should hold all objects that need to be removed. It's courteous to
         // clean up after yourself!
         this.children = [];
+        this.visible = true;
     }
 
     getRaycastIntersects() : Array<Object> {
@@ -78,6 +80,11 @@ class Layer {
         for (var i = 0; i < self.children.length; i++) {
             scene.remove(self.children[i]);
         }
+    }
+
+    toggleVisibility() {
+        this.visible = !this.visible;
+        this.children.forEach(c => c.visible = this.visible);
     }
 
     requestInit(scene : Object) {
