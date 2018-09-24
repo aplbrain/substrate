@@ -83,6 +83,15 @@ class Layer {
     }
 
     toggleVisibility() {
+        /*
+        Make the layer invisible without removing from scene.
+
+        Arguments:
+            None
+        
+        Returns:
+            None
+        */
         this.visible = !this.visible;
         this.children.forEach(c => c.visible = this.visible);
     }
