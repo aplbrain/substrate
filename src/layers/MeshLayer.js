@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// $FlowFixMe
 import * as THREE from 'three';
 import Layer from '../Layer';
 import OBJLoader from '../loaders/OBJLoader';

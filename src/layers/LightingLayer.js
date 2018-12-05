@@ -16,6 +16,7 @@ limitations under the License.
 
 // @flow
 
+// $FlowFixMe
 import * as THREE from 'three';
 import Layer from '../Layer';
 
