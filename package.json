@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iscoe/substrate.git"
+    "url": "git+https://github.com/aplbrain/substrate.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/iscoe/substrate/issues"
+    "url": "https://github.com/aplbrain/substrate/issues"
   },
-  "homepage": "https://github.com/iscoe/substrate#readme"
+  "homepage": "https://github.com/aplbrain/substrate#readme"
 }

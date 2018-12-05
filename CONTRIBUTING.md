@@ -18,7 +18,7 @@ In order to develop substrate, you must clone the `substrate` repository.
 ### Core Contributors
 
 ```shell
-git clone https://github.com/iscoe/substrate
+git clone https://github.com/aplbrain/substrate
 ```
 
 ### Non-core contributors
@@ -33,7 +33,7 @@ We recommend forking the repository by clicking on the "Fork" button on the subs
 Though it is not required, we suggest _also_ cloning `substrate-demos`, which is a repo that contains simple demos for the substrate library. These demos may help you debug your changes to the substrate repository.
 
 ```shell
-git clone https://github.com/iscoe/substrate-demos
+git clone https://github.com/aplbrain/substrate-demos
 ```
 
 ## Submitting changes
@@ -74,7 +74,7 @@ While building the minified file is adequate to rebuild both the module as well 
 
 ## Using the `substrate-demos` repo to debug edits to `substrate`
 
-It may help to use a minimal working example to debug your changes as you edit substrate. If that is the case, you may choose to use [`substrate-demos`](https://github.com/iscoe/substrate-demos), which has many already-built and known-to-work code examples in it.
+It may help to use a minimal working example to debug your changes as you edit substrate. If that is the case, you may choose to use [`substrate-demos`](https://github.com/aplbrain/substrate-demos), which has many already-built and known-to-work code examples in it.
 
 ### Installing your edited version of substrate
 
