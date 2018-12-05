@@ -1,6 +1,6 @@
 {
   "name": "apl-substrate",
-  "version": "1.0.4",
+  "version": "1.1.1",
   "description": "Open-source platform on which 3D visualizations can be drawn.",
   "main": "index.js",
   "dependencies": {
