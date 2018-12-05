@@ -18,8 +18,8 @@ title: substrate
 description: >
   A high-speed three.js substrate for visualizing biofidelic data
 baseurl: "/substrate"
-url: "https://jhuapl-boss.github.io/substrate"
-github_username: jhuapl-boss
+url: "https://aplbrain.github.io/substrate"
+github_username: aplbrain
 
 # Build settings
 markdown: kramdown
