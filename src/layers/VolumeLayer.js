@@ -116,6 +116,7 @@ export default class VolumeLayer extends Layer {
 
         let particleSystem = new THREE.Points(geometry, shaderMaterial);
 
+        self.children.push(particleSystem);
         scene.add(particleSystem);
     }
 }

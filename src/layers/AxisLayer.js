@@ -27,8 +27,8 @@ export default class AxisLayer extends Layer {
 
     requestInit(scene : Object) {
         let self = this;
-        self.children.push(
-            scene.add(new THREE.AxesHelper(5))
-        );
+        let axes = new THREE.AxesHelper(5);
+        self.children.push(axes);
+        scene.add(axes);
     }
 }
