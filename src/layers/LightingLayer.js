@@ -16,6 +16,7 @@ limitations under the License.
 
 // @flow
 
+// $FlowFixMe
 import * as THREE from 'three';
 import Layer from '../Layer';
 
@@ -30,14 +31,17 @@ export default class LightingLayer extends Layer {
         // Key
         let key = new THREE.PointLight(0xfff, 1, 100);
         key.position.set(-5, -5, 5);
-        self.children.push(scene.add(key));
+        self.children.push(key);
+        scene.add(key);
         // Fill
         let fill = new THREE.PointLight(0xccc, 0.7, 100);
         fill.position.set(5, -5, 4);
-        self.children.push(scene.add(fill));
+        self.children.push(fill);
+        scene.add(fill);
         // Back
         let back = new THREE.PointLight(0xccc, 0.65, 100);
         back.position.set(-5, 5, 3);
-        self.children.push(scene.add(back));
+        self.children.push(back);
+        scene.add(back);
     }
 }
