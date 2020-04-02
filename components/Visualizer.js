@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Licensed under the Apache License, Version 2.0 (the "License");
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      you may not use this file except in compliance with the License.
@@ -20,9 +20,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
-var _three = require('three/build/three.min');
+var _three = require('three');
 
-var _THREE = _interopRequireWildcard(_three);
+var THREE = _interopRequireWildcard(_three);
+
+var _TrackballControls = require('./controls/TrackballControls.js');
+
+var _TrackballControls2 = _interopRequireDefault(_TrackballControls);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30,12 +36,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// import TrackballControls from 'three-trackballcontrols';
-
-window.THREE = window.THREE || _THREE;
-
-// window.THREE.TrackballControls = TrackballControls;
-
+THREE.TrackballControls = _TrackballControls2.default;
+THREE.TrackballControls.prototype = Object.create(THREE.EventDispatcher.prototype);
+THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 
 var Visualizer = function () {
     function Visualizer(props) {
@@ -47,16 +50,16 @@ var Visualizer = function () {
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || function (viz, cam, dom) {
-            self.controls = new window.THREE.TrackballControls(cam, dom);
+            self.controls = new THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
             self.controls.maxDistance = 4000;
         };
-        this.cameraDistance = this.props.cameraDistance || 1000;
-        this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
+        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
 
-        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
+        this.origin = this.props.origin || [0, 0, 0];
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, 100];
 
         this.onReady = this.props.onReady || function (self) {};
         this.onReady(self);
@@ -65,7 +68,6 @@ var Visualizer = function () {
         this.onClick = this.props.onClick || function () {};
 
         this.vizWidth = props.width || window.innerWidth;
-        console.log(this.vizWidth);
         this.vizHeight = props.height || window.innerHeight;
 
         // obligatory binding to class
@@ -83,6 +85,9 @@ var Visualizer = function () {
         value: function resize(newWidth, newHeight) {
             /*
             Resize the Visualizer to new pixel sizes.
+             Arguments:
+                newWidth (number): New x, or undefined
+                newHeight (number): New y, or undefined
             */
             if (!newWidth) {
                 newWidth = this.container.offsetWidth;
@@ -97,12 +102,23 @@ var Visualizer = function () {
     }, {
         key: 'removeLayer',
         value: function removeLayer(key) {
+            /*
+            Remove a layer at a given string.
+             Arguments:
+                key (number|string): The key to remove
+            */
             this.renderLayers[key].clearChildren(self.scene);
             delete this.renderLayers[key];
         }
     }, {
         key: 'addLayer',
         value: function addLayer(key, layer) {
+            /*
+            Add a new layer to the Visualizer.
+             Arguments:
+                key (number|string): The key to add
+                layer (Layer): The instantiated Layer to add
+            */
             this.renderLayers[key] = layer;
             this.renderLayers[key].requestInit(self.scene);
         }
@@ -142,13 +158,13 @@ var Visualizer = function () {
             var self = this;
 
             // Needed for mouse-camera raytracing (for mouse events):
-            self.mouse = new window.THREE.Vector2();
-            self.raycaster = new window.THREE.Raycaster();
+            self.mouse = new THREE.Vector2();
+            self.raycaster = new THREE.Raycaster();
 
             // Set up scene primitives:
-            self.scene = new window.THREE.Scene();
+            self.scene = new THREE.Scene();
             window.scene = self.scene;
-            self.renderer = new window.THREE.WebGLRenderer();
+            self.renderer = new THREE.WebGLRenderer();
             self.renderer.setPixelRatio(window.devicePixelRatio);
             self.renderer.setSize(this.vizWidth, this.vizHeight);
             self.scene.background = self.backgroundColor;
@@ -162,11 +178,11 @@ var Visualizer = function () {
             self.container = container;
 
             // Provide camera, controls, and renderer:
-            self.camera = new window.THREE.PerspectiveCamera(10, self.vizWidth / self.vizHeight, 1, 100000);
+            self.camera = new THREE.PerspectiveCamera(10, self.vizWidth / self.vizHeight, 1, 100000);
 
             // Set the default camera location.
             // TODO: Allow this to be overridden by a prop
-            self.setCameraLocRot(self.startingCameraPosition, [1, 0, 0]);
+            self.setCameraLocRot(self.startingCameraPosition, [0, 1, 0]);
 
             self.setControls(self, self.camera, self.renderer.domElement);
 
@@ -208,7 +224,7 @@ var Visualizer = function () {
             ray from (x, y) on the screen to +infinity.
             */
             var self = this;
-            self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
+            self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
             return self.raycaster.intersectObjects(self.scene.children);
         }
     }, {

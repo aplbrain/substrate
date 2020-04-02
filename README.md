@@ -5,8 +5,8 @@
 
 <p align="center">
 <a href="https://badge.fury.io/js/apl-substrate"><img alt="npm version" src="https://badge.fury.io/js/apl-substrate.svg" /></a> •
-<a href="https://circleci.com/gh/jhuapl-boss/substrate/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg" /></a> •
-<a href="https://codeclimate.com/github/jhuapl-boss/substrate"><img alt="Code Climate" src="https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg" /></a>
+<a href="https://circleci.com/gh/aplbrain/substrate/tree/master"><img alt="CircleCI" src="https://circleci.com/gh/aplbrain/substrate.svg?style=svg" /></a> •
+<a href="https://codeclimate.com/github/aplbrain/substrate"><img alt="Code Climate" src="https://codeclimate.com/github/aplbrain/substrate/badges/gpa.svg" /></a>
 </p>
 
 
@@ -19,7 +19,7 @@ OR:
 
 - Clone the repository.
 ```
-git clone https://github.com/jhuapl-boss/substrate.git
+git clone https://github.com/aplbrain/substrate.git
 ```
 - Install all dependencies.
 ```
@@ -34,7 +34,7 @@ import Visualizer from 'apl-substrate/components/Visualizer';
 import AxisLayer from 'apl-substrate/components/layers/AxisLayer';
 
 V = new Visualizer({
-    renderTarget: "dom-id",
+    renderTarget: "existing-dom-id",
     layers: {
         axis: new AxisLayer()
     }
@@ -44,7 +44,25 @@ V.triggerRender();
 ```
 
 
-More documentation forthcoming... In the meantime, see the inline documentation, or get in touch with @j6k4m8.
+For more documentation, see the [docs/](docs/) directory.
+
+# Contributing
+
+Before contributing, please see the [contributors' guide](CONTRIBUTING.md).
 
 ## License
 If not otherwise marked, all code in this repository falls under the license granted in LICENSE.md.
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars0.githubusercontent.com/u/7283561?v=4" width="100px;"/><br /><sub><b>Joe Downs</b></sub>](https://github.com/jtpdowns)<br />[💻](https://github.com/aplbrain/substrate/commits?author=jtpdowns "Code") | [<img src="https://avatars3.githubusercontent.com/u/14301614?v=4" width="100px;"/><br /><sub><b>hpcowley</b></sub>](https://github.com/hpcowley)<br />[💻](https://github.com/aplbrain/substrate/commits?author=hpcowley "Code") | [<img src="https://avatars2.githubusercontent.com/u/693511?v=4" width="100px;"/><br /><sub><b>Jordan Matelsky</b></sub>](http://jordan.matelsky.com)<br />[💻](https://github.com/aplbrain/substrate/commits?author=j6k4m8 "Code") |
+| :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

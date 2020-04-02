@@ -1,5 +1,5 @@
 /*
-Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@ limitations under the License.
 
 // @flow
 
-import * as _THREE from 'three/build/three.min';
-// import TrackballControls from 'three-trackballcontrols';
+// $FlowFixMe
+import * as THREE from 'three';
+import TrackballControls from './controls/TrackballControls.js';
 
-window.THREE = window.THREE || _THREE;
 
-// window.THREE.TrackballControls = TrackballControls;
-
+THREE.TrackballControls = TrackballControls;
+THREE.TrackballControls.prototype = Object.create(THREE.EventDispatcher.prototype);
+THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 
 export default class Visualizer {
 
@@ -31,10 +32,9 @@ export default class Visualizer {
     setControls : Function;
     controls : Object;
     container : Object;
-    cameraDistance : number;
     backgroundColor : Object;
+    origin : [number, number, number];
     startingCameraPosition : [number, number, number];
-
     onReady: Function;
     onKeyDown : Function;
     onClick : Function;
@@ -63,16 +63,16 @@ export default class Visualizer {
 
         this.renderLayers = this.props.renderLayers || {};
         this.setControls = this.props.setControls || ((viz, cam, dom) => {
-            self.controls = new window.THREE.TrackballControls(cam, dom);
+            self.controls = new THREE.TrackballControls(cam, dom);
             self.controls.rotateSpeed = 1.0;
             self.controls.zoomSpeed = 0.5;
             self.controls.panSpeed = 0.05;
             self.controls.maxDistance = 4000;
         });
-        this.cameraDistance = this.props.cameraDistance || 1000;
-        this.backgroundColor = this.props.backgroundColor || new window.THREE.Color(0x000000);
+        this.backgroundColor = this.props.backgroundColor || new THREE.Color(0x000000);
 
-        this.startingCameraPosition = props.startingCameraPosition || [0, 0, -100];
+        this.origin = this.props.origin || [0, 0, 0];
+        this.startingCameraPosition = props.startingCameraPosition || [0, 0, 100];
 
         this.onReady = this.props.onReady || (self => {});
         this.onReady(self);
@@ -81,7 +81,6 @@ export default class Visualizer {
         this.onClick = this.props.onClick || (() => {});
 
         this.vizWidth = props.width || window.innerWidth;
-        console.log(this.vizWidth);
         this.vizHeight = props.height || window.innerHeight;
 
         // obligatory binding to class
@@ -169,13 +168,13 @@ export default class Visualizer {
         let self = this;
 
         // Needed for mouse-camera raytracing (for mouse events):
-        self.mouse = new window.THREE.Vector2();
-        self.raycaster = new window.THREE.Raycaster();
+        self.mouse = new THREE.Vector2();
+        self.raycaster = new THREE.Raycaster();
 
         // Set up scene primitives:
-        self.scene = new window.THREE.Scene();
+        self.scene = new THREE.Scene();
         window.scene = self.scene;
-        self.renderer = new window.THREE.WebGLRenderer();
+        self.renderer = new THREE.WebGLRenderer();
         self.renderer.setPixelRatio(window.devicePixelRatio);
         self.renderer.setSize(this.vizWidth, this.vizHeight);
         self.scene.background = self.backgroundColor;
@@ -189,7 +188,7 @@ export default class Visualizer {
         self.container = container;
 
         // Provide camera, controls, and renderer:
-        self.camera = new window.THREE.PerspectiveCamera(
+        self.camera = new THREE.PerspectiveCamera(
             10,
             self.vizWidth / self.vizHeight,
             1, 100000
@@ -199,7 +198,7 @@ export default class Visualizer {
         // TODO: Allow this to be overridden by a prop
         self.setCameraLocRot(
             self.startingCameraPosition,
-            [1, 0, 0]
+            [0, 1, 0]
         );
 
         self.setControls(self, self.camera, self.renderer.domElement);
@@ -241,7 +240,7 @@ export default class Visualizer {
         ray from (x, y) on the screen to +infinity.
         */
         let self = this;
-        self.raycaster.setFromCamera(new window.THREE.Vector2(x, y), self.camera);
+        self.raycaster.setFromCamera(new THREE.Vector2(x, y), self.camera);
         return self.raycaster.intersectObjects(self.scene.children);
     }
 

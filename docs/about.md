@@ -6,15 +6,15 @@ permalink: /about/
 
 # substrate
 
-CircleCI: [![CircleCI](https://circleci.com/gh/jhuapl-boss/substrate/tree/master.svg?style=svg)](https://circleci.com/gh/jhuapl-boss/substrate/tree/master)
+CircleCI: [![CircleCI](https://circleci.com/gh/aplbrain/substrate/tree/master.svg?style=svg)](https://circleci.com/gh/aplbrain/substrate/tree/master)
 
-CodeClimate: [![Code Climate](https://codeclimate.com/github/jhuapl-boss/substrate/badges/gpa.svg)](https://codeclimate.com/github/jhuapl-boss/substrate)
+CodeClimate: [![Code Climate](https://codeclimate.com/github/aplbrain/substrate/badges/gpa.svg)](https://codeclimate.com/github/aplbrain/substrate)
 
 ## Installation and Configuration
 
 - Clone the repository.
 ```
-git clone https://github.com/jhuapl-boss/substrate.git
+git clone https://github.com/aplbrain/substrate.git
 ```
 - Install all dependencies.
 ```

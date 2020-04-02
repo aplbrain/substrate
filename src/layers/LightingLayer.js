@@ -1,5 +1,5 @@
 /*
-Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,18 +16,32 @@ limitations under the License.
 
 // @flow
 
-import * as THREE from 'three/build/three.min';
+// $FlowFixMe
+import * as THREE from 'three';
 import Layer from '../Layer';
 
 
-export default class ThreejsLightingLayer extends Layer {
+export default class LightingLayer extends Layer {
+    /*
+    Classic three-point lighting scheme, as a substrate layer.
+    */
 
     requestInit(scene : Object) {
         let self = this;
-        self.children.push(
-            scene.add(
-                new THREE.AmbientLight(0x2ee)
-            )
-        );
+        // Key
+        let key = new THREE.PointLight(0xfff, 1, 100);
+        key.position.set(-5, -5, 5);
+        self.children.push(key);
+        scene.add(key);
+        // Fill
+        let fill = new THREE.PointLight(0xccc, 0.7, 100);
+        fill.position.set(5, -5, 4);
+        self.children.push(fill);
+        scene.add(fill);
+        // Back
+        let back = new THREE.PointLight(0xccc, 0.65, 100);
+        back.position.set(-5, 5, 3);
+        self.children.push(back);
+        scene.add(back);
     }
 }

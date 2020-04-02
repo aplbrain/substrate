@@ -1,0 +1,40 @@
+{
+  "projectName": "substrate",
+  "projectOwner": "aplbrain",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "jtpdowns",
+      "name": "Joe Downs",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7283561?v=4",
+      "profile": "https://github.com/jtpdowns",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "hpcowley",
+      "name": "hpcowley",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/14301614?v=4",
+      "profile": "https://github.com/hpcowley",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "j6k4m8",
+      "name": "Jordan Matelsky",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/693511?v=4",
+      "profile": "http://jordan.matelsky.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
