@@ -8,6 +8,7 @@ This layer renders an array of LineSegments. To use it, declare your layer
 like so:
 
     let line1 = [
+      // x, y, z
         [0, 0, 0],
         [1, 1, 1],
         [2, 5, 3]
