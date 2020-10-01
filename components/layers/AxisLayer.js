@@ -38,6 +38,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+// $FlowFixMe
+
+
 var AxisLayer = function (_Layer) {
     _inherits(AxisLayer, _Layer);
 
@@ -56,7 +59,9 @@ var AxisLayer = function (_Layer) {
 
         value: function requestInit(scene) {
             var self = this;
-            self.children.push(scene.add(new THREE.AxesHelper(5)));
+            var axes = new THREE.AxesHelper(5);
+            self.children.push(axes);
+            scene.add(axes);
         }
     }]);
 

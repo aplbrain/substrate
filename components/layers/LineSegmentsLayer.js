@@ -40,6 +40,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+// $FlowFixMe
+
+
 var LineSegmentsLayer = function (_Layer) {
     _inherits(LineSegmentsLayer, _Layer);
 

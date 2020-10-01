@@ -38,6 +38,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+// $FlowFixMe
+
+
 var LightingLayer = function (_Layer) {
     _inherits(LightingLayer, _Layer);
 
@@ -59,15 +62,18 @@ var LightingLayer = function (_Layer) {
             // Key
             var key = new THREE.PointLight(0xfff, 1, 100);
             key.position.set(-5, -5, 5);
-            self.children.push(scene.add(key));
+            self.children.push(key);
+            scene.add(key);
             // Fill
             var fill = new THREE.PointLight(0xccc, 0.7, 100);
             fill.position.set(5, -5, 4);
-            self.children.push(scene.add(fill));
+            self.children.push(fill);
+            scene.add(fill);
             // Back
             var back = new THREE.PointLight(0xccc, 0.65, 100);
             back.position.set(-5, 5, 3);
-            self.children.push(scene.add(back));
+            self.children.push(back);
+            scene.add(back);
         }
     }]);
 

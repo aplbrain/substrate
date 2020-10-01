@@ -418,19 +418,19 @@ var OBJLoader = function () {
 
                     switch (data[0]) {
 
-                    case 'v':
-                        state.vertices.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
-                        if (data.length === 8) {
+                        case 'v':
+                            state.vertices.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+                            if (data.length === 8) {
 
-                            state.colors.push(parseFloat(data[4]), parseFloat(data[5]), parseFloat(data[6]));
-                        }
-                        break;
-                    case 'vn':
-                        state.normals.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
-                        break;
-                    case 'vt':
-                        state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
-                        break;
+                                state.colors.push(parseFloat(data[4]), parseFloat(data[5]), parseFloat(data[6]));
+                            }
+                            break;
+                        case 'vn':
+                            state.normals.push(parseFloat(data[1]), parseFloat(data[2]), parseFloat(data[3]));
+                            break;
+                        case 'vt':
+                            state.uvs.push(parseFloat(data[1]), parseFloat(data[2]));
+                            break;
 
                     }
                 } else if (lineFirstChar === 'f') {

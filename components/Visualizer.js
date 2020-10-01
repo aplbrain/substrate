@@ -20,6 +20,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
+// $FlowFixMe
+
+
 var _three = require('three');
 
 var THREE = _interopRequireWildcard(_three);

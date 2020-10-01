@@ -42,6 +42,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                limitations under the License.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
+// $FlowFixMe
+
+
 THREE.OBJLoader = _OBJLoader2.default;
 
 var MeshLayer = function (_Layer) {

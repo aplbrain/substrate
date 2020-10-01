@@ -44,6 +44,8 @@ var frag = 'uniform sampler2D texture;\n\nvarying vec3 vColor;\n\nvoid main() {\
 
 var vert = 'attribute float size;\nvarying vec3 vColor;\nvoid main() {\n    vColor = color;\n    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);\n    gl_PointSize = size * (300.0 / -mvPosition.z);\n    gl_Position = projectionMatrix * mvPosition;\n}\n';
 
+// $FlowFixMe
+
 var VolumeLayer = function (_Layer) {
     _inherits(VolumeLayer, _Layer);
 
@@ -123,6 +125,7 @@ var VolumeLayer = function (_Layer) {
 
             var particleSystem = new THREE.Points(geometry, shaderMaterial);
 
+            self.children.push(particleSystem);
             scene.add(particleSystem);
         }
     }]);
