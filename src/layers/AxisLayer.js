@@ -1,5 +1,5 @@
 /*
-Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
+Copyright 2020 The Johns Hopkins University Applied Physics Laboratory
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ export default class AxisLayer extends Layer {
     The hello-world of layers. Renders a 5-radius RGB-XYZ axis.
     */
 
-    requestInit(scene : Object) {
+    requestInit(scene: Object) {
         let self = this;
         let axes = new THREE.AxesHelper(5);
         self.children.push(axes);

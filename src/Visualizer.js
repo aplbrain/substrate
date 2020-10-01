@@ -1,5 +1,5 @@
 /*
-Copyright 2018 The Johns Hopkins University Applied Physics Laboratory
+Copyright 2020 The Johns Hopkins University Applied Physics Laboratory
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,36 +27,36 @@ THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
 
 export default class Visualizer {
 
-    props : Object;
-    renderLayers : Object;
-    setControls : Function;
-    controls : Object;
-    container : Object;
-    backgroundColor : Object;
-    origin : [number, number, number];
-    startingCameraPosition : [number, number, number];
+    props: Object;
+    renderLayers: Object;
+    setControls: Function;
+    controls: Object;
+    container: Object;
+    backgroundColor: Object;
+    origin: [number, number, number];
+    startingCameraPosition: [number, number, number];
     onReady: Function;
-    onKeyDown : Function;
-    onClick : Function;
+    onKeyDown: Function;
+    onClick: Function;
 
-    camera : Object;
-    mouse : Object;
-    raycaster : Object;
-    scene : Object;
-    renderer : Object;
+    camera: Object;
+    mouse: Object;
+    raycaster: Object;
+    scene: Object;
+    renderer: Object;
 
-    animate : Function;
-    getObjectsAtScreenCoordinate : Function;
-    init : Function;
-    requestUpdate : Function;
-    setCameraLocRot : Function;
-    triggerRender : Function;
-    resize : Function;
+    animate: Function;
+    getObjectsAtScreenCoordinate: Function;
+    init: Function;
+    requestUpdate: Function;
+    setCameraLocRot: Function;
+    triggerRender: Function;
+    resize: Function;
 
-    vizWidth : number;
-    vizHeight : number;
+    vizWidth: number;
+    vizHeight: number;
 
-    constructor(props : Object) {
+    constructor(props: Object) {
         let self = this;
 
         this.props = props;
@@ -74,11 +74,11 @@ export default class Visualizer {
         this.origin = this.props.origin || [0, 0, 0];
         this.startingCameraPosition = props.startingCameraPosition || [0, 0, 100];
 
-        this.onReady = this.props.onReady || (self => {});
+        this.onReady = this.props.onReady || (self => { });
         this.onReady(self);
 
-        this.onKeyDown = this.props.onKeyDown || (() => {});
-        this.onClick = this.props.onClick || (() => {});
+        this.onKeyDown = this.props.onKeyDown || (() => { });
+        this.onClick = this.props.onClick || (() => { });
 
         this.vizWidth = props.width || window.innerWidth;
         this.vizHeight = props.height || window.innerHeight;
@@ -93,7 +93,7 @@ export default class Visualizer {
         this.resize = this.resize.bind(this);
     }
 
-    resize(newWidth : number, newHeight : number) {
+    resize(newWidth: number, newHeight: number) {
         /*
         Resize the Visualizer to new pixel sizes.
 
@@ -112,7 +112,7 @@ export default class Visualizer {
         this.requestUpdate();
     }
 
-    removeLayer(key : number|string) {
+    removeLayer(key: number | string) {
         /*
         Remove a layer at a given string.
 
@@ -123,7 +123,7 @@ export default class Visualizer {
         delete this.renderLayers[key];
     }
 
-    addLayer(key : number|string, layer : Object) {
+    addLayer(key: number | string, layer: Object) {
         /*
         Add a new layer to the Visualizer.
 
@@ -151,8 +151,8 @@ export default class Visualizer {
     }
 
     setCameraLocRot(
-        loc : [number, number, number],
-        rot : [number, number, number]
+        loc: [number, number, number],
+        rot: [number, number, number]
     ) {
         /*
         Sets the camera's location and rotation. This is useful if you have
@@ -233,7 +233,7 @@ export default class Visualizer {
         }
     }
 
-    getObjectsAtScreenCoordinate(x : number, y : number) {
+    getObjectsAtScreenCoordinate(x: number, y: number): Object {
         /*
         This is eventually moving out of the Visualizer and into individual
         Layers. Currently returns ALL objects in the scene that intersect the

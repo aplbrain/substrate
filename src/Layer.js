@@ -1,5 +1,5 @@
 /*
-Copyright 2016 The Johns Hopkins University Applied Physics Laboratory
+Copyright 2020 The Johns Hopkins University Applied Physics Laboratory
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ limitations under the License.
 
 class Layer {
 
-    children : Array<Object>;
+    children: Array<Object>;
 
-    constructor(props : Object) {
+    constructor(props: Object) {
         // the `children` array holds all objects that this layer should be
         // responsible for. If you remove this layer from the scene, .children
         // should hold all objects that need to be removed. It's courteous to
@@ -29,12 +29,12 @@ class Layer {
         this.children = [];
     }
 
-    getRaycastIntersects() : Array<Object> {
+    getRaycastIntersects(): Array<Object> {
         // Stubbed.
         return [];
     }
 
-    getAtCoordinate(xyz : Array<number>) : Array<Object> {
+    getAtCoordinate(xyz: Array<number>): Array<Object> {
         /*
         Returns the metadata for the object in this layer at the position
         (x, y, z).
@@ -49,7 +49,7 @@ class Layer {
         return [];
     }
 
-    rescale(xyz : Array<number>) {
+    rescale(xyz: Array<number>): Array<number> {
         /*
         Convert layer-space into global space. For instance, if your images are
         10x10 but need to be half the size when rendered, this should return
@@ -64,7 +64,7 @@ class Layer {
         return xyz;
     }
 
-    clearChildren(scene : Object) {
+    clearChildren(scene: Object) {
         /*
         Remove all of this layer's children from the scene.
 
@@ -80,7 +80,7 @@ class Layer {
         }
     }
 
-    requestInit(scene : Object) {
+    requestInit(scene: Object) {
         /*
         This is run whenever the Visualizer requests that the layer be _fully_
         re-rendered from scratch. Override this function with your own layer's
@@ -99,7 +99,7 @@ class Layer {
         // Permit adding to scene and attaching hooks.
     }
 
-    requestRender(scene : Object) {
+    requestRender(scene: Object): boolean {
         /*
         This is run whenever the Visualizer requests that the layer be partially
         re-rendered (useful in cases where you simply need to update a material
