@@ -4,7 +4,7 @@
   "description": "Open-source platform on which 3D visualizations can be drawn.",
   "main": "index.js",
   "dependencies": {
-    "three": "^0.95.0"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
